@@ -55,7 +55,7 @@ public class Backend {
        // Vektor anzeige = new Vector();
 
         while (!rs.isLast())
-            // Datenbank durchsuchen
+
             return null;
         return null;
     }
