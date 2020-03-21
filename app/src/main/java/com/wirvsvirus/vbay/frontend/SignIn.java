@@ -32,7 +32,11 @@ public class SignIn extends AppCompatActivity {
       }
     });
 
+  }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
   }
 
   public void onLoginPress(){

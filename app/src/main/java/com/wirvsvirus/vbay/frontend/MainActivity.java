@@ -23,6 +23,14 @@ private Button signUpButton;
         openSignUp();
       }
     });
+
+    System.out.println("create!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  }
+
+
+  @Override
+  protected void onStart() {
+    super.onStart();
   }
 
   public void openSignUp(){
