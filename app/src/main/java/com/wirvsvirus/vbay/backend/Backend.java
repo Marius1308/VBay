@@ -1,4 +1,6 @@
 package com.wirvsvirus.vbay.backend;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -9,6 +11,7 @@ public class Backend {
     private Statement stmt;
     private static Backend backend;
     private ArrayList<Einkaufsliste> einkauflisten = new ArrayList<>();
+
     private Backend() {
 
     }
@@ -61,9 +64,9 @@ public class Backend {
     }
 
     public Einkaufsliste[] anzeigeÜbersicht() {
-        // Lars
         return null;
-    }
+    }  // Lars
+
 
     public void einkaufslisteAnnehmen(Einkaufsliste liste){
         einkauflisten.add(liste);
@@ -87,5 +90,12 @@ public class Backend {
             System.out.println(e);
             return 0;
         }
+    }
+
+    public void passWortVerchlüsselung(String passwort) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(passwort.trim().getBytes());
+        byte[] hash = md.digest();
+        System.out.println(new String(hash));
     }
 }
