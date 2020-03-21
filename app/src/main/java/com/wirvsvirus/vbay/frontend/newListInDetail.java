@@ -53,7 +53,7 @@ public class newListInDetail extends AppCompatActivity {
 
   private void acceptList(){
     Intent intent;
-    intent = new Intent(this, Menu.class);
+    intent = new Intent(this, MenuHelfer.class);
     startActivity(intent);
   }
 

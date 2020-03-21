@@ -8,20 +8,29 @@ import android.widget.Button;
 
 import com.example.marius.vbay.R;
 
-public class Menu extends AppCompatActivity {
+public class MenuHelfer extends AppCompatActivity {
 
   Button annehmen;
+  Button abschluss;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_menu);
 
     annehmen = (Button) findViewById(R.id.einkaufAnnehmenButton);
+    abschluss = (Button) findViewById(R.id.einkaufAbschlussButton);
 
     annehmen.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         annehmenPress();
+      }
+    });
+
+    abschluss.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        abschlussPress();
       }
     });
   }
@@ -34,6 +43,12 @@ public class Menu extends AppCompatActivity {
   public void annehmenPress(){
     Intent intent;
     intent = new Intent(this, EinkaufUebersicht.class);
+    startActivity(intent);
+  }
+
+  public  void abschlussPress(){
+    Intent intent;
+    intent = new Intent(this, EinkaufAbschiessen.class);
     startActivity(intent);
   }
 }

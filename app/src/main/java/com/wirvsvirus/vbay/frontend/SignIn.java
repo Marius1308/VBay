@@ -48,7 +48,7 @@ public class SignIn extends AppCompatActivity {
   return;
     }
     Intent intent;
-    intent = new Intent(this, Menu.class);
+    intent = new Intent(this, MenuHelfer.class);
     startActivity(intent);
   }
 
