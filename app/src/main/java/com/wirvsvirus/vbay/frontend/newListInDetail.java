@@ -21,7 +21,7 @@ public class newListInDetail extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_new_list_in_detail);
 
-    descriptionDetailText = (TextView) findViewById(R.id.descriptionDetail);
+    descriptionDetailText = (TextView) findViewById(R.id.descriptionAbschluss);
     nameText = (TextView) findViewById(R.id.nameDetail);
     backToList = (Button) findViewById(R.id.backDetail);
     accept = (Button) findViewById(R.id.acceptDetail);

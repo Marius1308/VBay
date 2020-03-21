@@ -48,7 +48,7 @@ public class MenuHelfer extends AppCompatActivity {
 
   public  void abschlussPress(){
     Intent intent;
-    intent = new Intent(this, EinkaufAbschiessen.class);
+    intent = new Intent(this, AktiveEinkaefe.class);
     startActivity(intent);
   }
 }

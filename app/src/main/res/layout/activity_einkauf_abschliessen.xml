@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.wirvsvirus.vbay.frontend.newListInDetail">
+  tools:context="com.wirvsvirus.vbay.frontend.EinkaufAbschliessen">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -24,7 +24,7 @@
       android:textAlignment="center" />
 
     <TextView
-      android:id="@+id/nameDetail"
+      android:id="@+id/nameAbschluss"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="Name:" />
@@ -36,22 +36,22 @@
       android:text="Beschreibung:" />
 
     <TextView
-      android:id="@+id/dateDetail"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Datum:" />
-
-    <TextView
-      android:id="@+id/distanceDetail"
+      android:id="@+id/distanceAbschluss"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="Entfernung:" />
 
     <TextView
-      android:id="@+id/listDetail"
+      android:id="@+id/listAbschluss"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="Einkaufsliste:" />
+
+    <TextView
+      android:id="@+id/dateAbschluss"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Datum:" />
 
     <ScrollView
       android:layout_width="match_parent"
@@ -72,19 +72,20 @@
       android:orientation="horizontal">
 
       <Button
-        android:id="@+id/backDetail"
+        android:id="@+id/abbruch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:text="Nicht annehmen" />
+        android:text="Einkauf abbrechen" />
 
       <Button
-        android:id="@+id/acceptDetail"
+        android:id="@+id/abschluss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="annehmen" />
+        android:text="Einkauf abschliessen" />
     </LinearLayout>
+
   </LinearLayout>
 </android.support.constraint.ConstraintLayout>
