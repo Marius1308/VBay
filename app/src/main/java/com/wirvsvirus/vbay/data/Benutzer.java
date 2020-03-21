@@ -2,7 +2,7 @@ package com.wirvsvirus.vbay.data;
 
 import java.io.Serializable;
 
-class Benutzer implements Serializable {
+public class Benutzer implements Serializable {
     private String email;
     private String name;
     private String vorname;
@@ -11,6 +11,24 @@ class Benutzer implements Serializable {
     private String strasseHausnr;
     private String adresszusatz;
     private String telefonNr;
+    private Double breitengrad;
+    private Double laengengrad;
+
+    public Double getBreitengrad() {
+        return breitengrad;
+    }
+
+    public void setBreitengrad(Double breitengrad) {
+        this.breitengrad = breitengrad;
+    }
+
+    public Double getLaengengrad() {
+        return laengengrad;
+    }
+
+    public void setLaengengrad(Double laengengrad) {
+        this.laengengrad = laengengrad;
+    }
 
     public String getEmail() {
         return email;

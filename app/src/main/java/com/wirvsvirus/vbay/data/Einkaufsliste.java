@@ -8,6 +8,7 @@ public class Einkaufsliste implements Serializable {
     private Benutzer beduerftiger;
     private int nrEinkaufsliste;
     private LocalDateTime uhrVon;
+    private LocalDateTime uhrBis;
     private Eintrag[] eintraege;
 
     public int getNrEinkaufsliste() {
@@ -33,8 +34,6 @@ public class Einkaufsliste implements Serializable {
     public void setUhrBis(LocalDateTime uhrBis) {
         this.uhrBis = uhrBis;
     }
-
-    private LocalDateTime uhrBis;
 
     public Benutzer getBeduerftiger() {
         return beduerftiger;
