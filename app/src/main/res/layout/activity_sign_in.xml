@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.example.marius.vbay.SignIn">
+  tools:context="com.wirvsvirus.vbay.frontend.SignIn">
 
   <LinearLayout
     android:id="@+id/etEmail"
@@ -18,7 +18,8 @@
       android:layout_height="wrap_content"
       android:text="TextView"
       android:textAlignment="center"
-      tools:text="Login" />
+      tools:text="Login"
+        android:gravity="center_horizontal" />
 
     <EditText
       android:id="@+id/etLoginEmail"
