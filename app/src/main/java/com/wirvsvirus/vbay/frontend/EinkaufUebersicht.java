@@ -1,4 +1,4 @@
-package com.example.marius.vbay;
+package com.wirvsvirus.vbay.frontend;
 
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.marius.vbay.R;
 
 public class EinkaufUebersicht extends AppCompatActivity {
   LinearLayout layout;

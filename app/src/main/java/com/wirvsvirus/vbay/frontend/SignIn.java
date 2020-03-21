@@ -1,4 +1,4 @@
-package com.example.marius.vbay;
+package com.wirvsvirus.vbay.frontend;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.marius.vbay.R;
 
 public class SignIn extends AppCompatActivity {
 
