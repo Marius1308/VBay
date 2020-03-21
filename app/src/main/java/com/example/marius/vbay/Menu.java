@@ -24,6 +24,11 @@ public class Menu extends AppCompatActivity {
     });
   }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
+  }
+
   public void annehmenPress(){
     Intent intent;
     intent = new Intent(this, EinkaufUebersicht.class);
