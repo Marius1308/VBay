@@ -1,11 +1,14 @@
 package com.wirvsvirus.vbay.backend;
 import java.sql.*;
+import java.util.ArrayList;
+
 import com.wirvsvirus.vbay.data.*;
 
 public class Backend {
 
     private Statement stmt;
     private static Backend backend;
+    private ArrayList<Einkaufsliste> einkauflisten = new ArrayList<>();
     private Backend() {
 
     }
@@ -60,6 +63,14 @@ public class Backend {
     public Einkaufsliste[] anzeigeÜbersicht() {
         // Lars
         return null;
+    }
+
+    public void einkaufslisteAnnehmen(Einkaufsliste liste){
+        einkauflisten.add(liste);
+    }
+
+    public Einkaufsliste[] getAkzeptierteEinkaufsliste(){
+        return (Einkaufsliste[]) einkauflisten.toArray();
     }
 
     public int test() {
