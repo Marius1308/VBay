@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.example.marius.vbay.Menu">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/EinkaufslisteHead"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Einkaufsliste:"
+      android:textAlignment="center"
+      android:textStyle="bold" />
+
+    <TextView
+      android:id="@+id/ListeEintrag"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="-Keine Einträge" />
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal">
+
+      <Button
+        android:id="@+id/einkaufAnnehmenButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Einkauf annehmen" />
+
+      <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Einkauf Abschließen" />
+    </LinearLayout>
+
+  </LinearLayout>
+</android.support.constraint.ConstraintLayout>

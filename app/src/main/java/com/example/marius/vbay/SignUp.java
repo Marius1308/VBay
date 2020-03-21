@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
@@ -40,7 +41,8 @@ public class SignUp extends AppCompatActivity {
     try {
 
     }catch (RuntimeException e){
-
+      openEnterDialog(e.getMessage());
+      return;
     }
 
 
@@ -57,6 +59,10 @@ public class SignUp extends AppCompatActivity {
 
   private boolean inputIsValid(){
  return true;
+  }
+
+  private void openEnterDialog(String exception){
+    Toast.makeText(getApplicationContext(), exception, Toast.LENGTH_LONG).show();
   }
 
 }
