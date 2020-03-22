@@ -11,26 +11,17 @@ import java.util.List;
 class AnfrageDelegate {
 
     public void einkaufAbschliessen(EinkaufslisteDetail einkaufsliste) {
-        //update email setzen einkaufsliste
+        abbrechenEinkaufslisteBeduerftiger(einkaufsliste);
     }
 
     public void einkaufAbbrechen(EinkaufslisteDetail einkaufsliste) {
+        Tool.execPHPString( "http://localhost/updateEinkaufslisteHelfer&email_beduerftiger="+einkaufsliste.getBeduerftiger().getEmail()+"&email_helfer="+einkaufsliste.getHelfer().get().getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
         //update email löschen in einkaufsliste
     }
 
-    public List<EinkaufslisteUebersicht> lesenEinkaufslistenUebersicht() {
-        String out = Tool.execPHPString( "http://localhost/lesenEinkaufslistenUebersicht");
-        List<EinkaufslisteUebersicht> einkaufslisten= new ArrayList<>();
-
-        String[] outLines = out.split("\\r?\\n");
-        for (int i =0;i<outLines.length;i++){
-            String[] outo = outLines[i].split(";");
-            einkaufslisten.add(Tool.createEinkaufsliste(outo));
-        }
-        return einkaufslisten;
-    }
 
     public void einkaufAnnehmen(EinkaufslisteDetail einkaufsliste, Benutzer helfer) {
+        Tool.execPHPString( "http://localhost/updateEinkaufslisteHelfer&email_beduerftiger="+"&email_helfer="+helfer.getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
         //update helfer bei einkaufsliste
     }
 
