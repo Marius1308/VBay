@@ -2,6 +2,7 @@ package com.wirvsvirus.vbay.backend;
 
 import com.wirvsvirus.vbay.data.Benutzer;
 import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -97,15 +98,15 @@ public class Tool {
         return new String[]{n.getEmail(),n.getName(),n.getVorname(),""+n.getPlz(),n.getOrt(),n.getStrasseHausnr(),n.getTelefonNr(),""+n.getBreitengrad(),""+n.getLaengengrad()};
     }
 
-    public static Einkaufsliste createEinkaufsliste(String[] param){
+    public static EinkaufslisteUebersicht createEinkaufsliste(String[] param){
 //        Einkaufsliste liste = new Einkaufsliste();
 //        liste.setBeduerftiger(param[0]);
 //        liste.setUhrVon(param[1]);
 //        liste.setUhrBis(new LocalDateTime(param[2]));
-        return new Einkaufsliste();
+        return new EinkaufslisteUebersicht();
     }
 
-    public static String[] aufdröselnEinkaufsliste(Einkaufsliste l){
-        return new String[]{l.getBeduerftiger().getEmail(),""+l.getUhrVon(),""+l.getUhrBis()};
+    public static String[] aufdröselnEinkaufsliste(EinkaufslisteUebersicht l){
+        return new String[]{l.getEmailBeduerftiger(),""+l.getUhrVon(),""+l.getUhrBis()};
     }
 }
