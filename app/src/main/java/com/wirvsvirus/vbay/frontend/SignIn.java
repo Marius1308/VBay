@@ -53,7 +53,7 @@ public class SignIn extends AppCompatActivity {
       startActivity(intent);// Todo switch
 
     } catch (Exception e){
-      openErrorDialog(e.getMessage());
+      openErrorDialog(e.toString());
       return;
 
     }
