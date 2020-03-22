@@ -1,8 +1,11 @@
 package com.wirvsvirus.vbay.backend;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
@@ -129,23 +132,18 @@ public class Backend {
         }
     }
 
-    public String execPHP(String scriptName, String param) {
-        StringBuilder output= null;
-        try {
-            String line;
-            output = new StringBuilder();
-            Process p = Runtime.getRuntime().exec("php " + scriptName + " " + param);
-            BufferedReader input =
-                    new BufferedReader
-                            (new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-                output.append(line);
-            }
-            input.close();
-        }
-        catch (Exception err) {
-            err.printStackTrace();
-        }
-        return output.toString();
+    public String execPHP(String Scripturl) throws IOException {
+            URL url = new URL(Scripturl);
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            urlConnection.getInputStream()));
+            String inputLine;
+            String input="";
+            while ((inputLine = in.readLine()) != null)
+                input +=";"+ inputLine;
+            in.close();
+            return input;
+
     }
 }
