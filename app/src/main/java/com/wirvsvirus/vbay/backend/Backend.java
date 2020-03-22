@@ -1,4 +1,8 @@
 package com.wirvsvirus.vbay.backend;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -97,5 +101,29 @@ public class Backend {
         md.update(passwort.trim().getBytes());
         byte[] hash = md.digest();
         System.out.println(new String(hash));
+    }
+
+    public String encodeURL(String url) throws MalformedURLException {
+        try {
+            String encodeURL= URLEncoder.encode( url, "UTF-8" );
+            return encodeURL;
+        } catch (UnsupportedEncodingException e) {
+            return "Fehler beim encoding" +e.getMessage();
+        }
+    }
+
+    public String decodeURL(String url) throws MalformedURLException {
+        try {
+            String prevURL="";
+            String decodeURL=url;
+            while(!prevURL.equals(decodeURL))
+            {
+                prevURL=decodeURL;
+                decodeURL= URLDecoder.decode( decodeURL, "UTF-8" );
+            }
+            return decodeURL;
+        } catch (UnsupportedEncodingException e) {
+            return "Fehler beim decoding" +e.getMessage();
+        }
     }
 }
