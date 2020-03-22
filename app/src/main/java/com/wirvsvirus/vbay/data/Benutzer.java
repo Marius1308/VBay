@@ -11,24 +11,7 @@ public class Benutzer implements Serializable {
     private String strasseHausnr;
     private String adresszusatz;
     private String telefonNr;
-    private Double breitengrad;
-    private Double laengengrad;
-
-    public Double getBreitengrad() {
-        return breitengrad;
-    }
-
-    public void setBreitengrad(Double breitengrad) {
-        this.breitengrad = breitengrad;
-    }
-
-    public Double getLaengengrad() {
-        return laengengrad;
-    }
-
-    public void setLaengengrad(Double laengengrad) {
-        this.laengengrad = laengengrad;
-    }
+    private String passwort;
 
     public String getEmail() {
         return email;
@@ -92,5 +75,28 @@ public class Benutzer implements Serializable {
 
     public void setTelefonNr(String telefonNr) {
         this.telefonNr = telefonNr;
+    }
+
+    private Double breitengrad;
+    private Double laengengrad;
+
+    public Double getBreitengrad() {
+        return breitengrad;
+    }
+
+    public void setBreitengrad(Double breitengrad) {
+        this.breitengrad = breitengrad;
+    }
+
+    public Double getLaengengrad() {
+        return laengengrad;
+    }
+
+    public void setLaengengrad(Double laengengrad) {
+        this.laengengrad = laengengrad;
+    }
+
+    public String getPasswort(){
+        return passwort;
     }
 }
