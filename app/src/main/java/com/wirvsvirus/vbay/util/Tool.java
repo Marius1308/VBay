@@ -1,7 +1,7 @@
-package com.wirvsvirus.vbay.backend;
+package com.wirvsvirus.vbay.util;
 
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tool {
-    public static String encodeURL(String url) throws MalformedURLException {
+    public static String encodeURL(String url) {
         try {
             String encodeURL= URLEncoder.encode( url, "UTF-8" );
             return encodeURL;
