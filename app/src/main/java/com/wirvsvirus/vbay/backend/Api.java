@@ -132,8 +132,8 @@ public class Api {
      * @param neu
      * @throws Exception
      */
-    public void bearbeitenEinkaufsliste(EinkaufslisteDetail neu) throws Exception{
-        anfrageDelegate.bearbeitenEinkaufsliste(neu);
+    public void bearbeitenEinkaufsliste(EinkaufslisteDetail alt, EinkaufslisteDetail neu) throws Exception{
+        anfrageDelegate.bearbeitenEinkaufsliste(alt, neu);
     }
 
     /**
