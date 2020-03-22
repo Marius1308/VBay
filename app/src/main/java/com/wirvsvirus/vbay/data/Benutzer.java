@@ -13,6 +13,18 @@ public class Benutzer implements Serializable {
     private String telefonNr;
     private String passwort;
 
+    public Benutzer(String email, String name, String vorname, Integer plz, String ort, String strasseHausnr, String adresszusatz, String telefonNr, String passwort) {
+        this.email = email;
+        this.name = name;
+        this.vorname = vorname;
+        this.plz = plz;
+        this.ort = ort;
+        this.strasseHausnr = strasseHausnr;
+        this.adresszusatz = adresszusatz;
+        this.telefonNr = telefonNr;
+        this.passwort = passwort;
+    }
+
     public String getEmail() {
         return email;
     }

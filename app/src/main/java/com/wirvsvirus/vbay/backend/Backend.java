@@ -1,4 +1,12 @@
 package com.wirvsvirus.vbay.backend;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -9,6 +17,7 @@ public class Backend {
     private Statement stmt;
     private static Backend backend;
     private ArrayList<Einkaufsliste> einkauflisten = new ArrayList<>();
+
     private Backend() {
 
     }
@@ -55,15 +64,15 @@ public class Backend {
        // Vektor anzeige = new Vector();
 
         while (!rs.isLast())
-            // Datenbank durchsuchen
+
             return null;
         return null;
     }
 
     public Einkaufsliste[] anzeigeÜbersicht() {
-        // Lars
         return null;
-    }
+    }  // Lars
+
 
     public void einkaufslisteAnnehmen(Einkaufsliste liste){
         einkauflisten.add(liste);
@@ -87,5 +96,56 @@ public class Backend {
             System.out.println(e);
             return 0;
         }
+    }
+
+    public void passWortVerchlüsselung(String passwort) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(passwort.trim().getBytes());
+        byte[] hash = md.digest();
+        System.out.println(new String(hash));
+    }
+
+    public String encodeURL(String url) throws MalformedURLException {
+        try {
+            String encodeURL= URLEncoder.encode( url, "UTF-8" );
+            return encodeURL;
+        } catch (UnsupportedEncodingException e) {
+            return "Fehler beim encoding" +e.getMessage();
+        }
+    }
+
+    public String decodeURL(String url) throws MalformedURLException {
+        try {
+            String prevURL="";
+            String decodeURL=url;
+            while(!prevURL.equals(decodeURL))
+            {
+                prevURL=decodeURL;
+                decodeURL= URLDecoder.decode( decodeURL, "UTF-8" );
+            }
+            return decodeURL;
+        } catch (UnsupportedEncodingException e) {
+            return "Fehler beim decoding" +e.getMessage();
+        }
+    }
+
+    public String execPHP(String scriptName, String param) {
+        StringBuilder output= null;
+        try {
+            String line;
+            output = new StringBuilder();
+            Process p = Runtime.getRuntime().exec("php " + scriptName + " " + param);
+            BufferedReader input =
+                    new BufferedReader
+                            (new InputStreamReader(p.getInputStream()));
+            while ((line = input.readLine()) != null) {
+                output.append(line);
+            }
+            input.close();
+        }
+        catch (Exception err) {
+            err.printStackTrace();
+        }
+        return output.toString();
     }
 }
