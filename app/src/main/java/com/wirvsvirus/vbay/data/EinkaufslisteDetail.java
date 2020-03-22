@@ -10,24 +10,7 @@ public class EinkaufslisteDetail implements Serializable {
     private int nrEinkaufsliste;
     private LocalDateTime uhrVon;
     private LocalDateTime uhrBis;
-
-  public Optional<Benutzer> getHelfer() {
-    return helfer;
-  }
-
-  public void setHelfer(Optional<Benutzer> helfer) {
-    this.helfer = helfer;
-  }
-
-  public Eintrag[] getEintraege() {
-    return eintraege;
-  }
-
-  public void setEintraege(Eintrag[] eintraege) {
-    this.eintraege = eintraege;
-  }
-
-  private Eintrag[] eintraege;
+    private Eintrag[] eintraege;
 
     private Optional<Benutzer> helfer;
 
@@ -71,5 +54,11 @@ public class EinkaufslisteDetail implements Serializable {
         this.beduerftiger = beduerftiger;
     }
 
+    public Optional<Benutzer> getHelfer(){
+        return helfer;
 
+    }
+    public void setHelfer(Optional<Benutzer> helfer){
+    this.helfer=helfer;
+    }
 }

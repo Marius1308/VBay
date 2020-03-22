@@ -10,18 +10,20 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 class UserVerwaltungDelegate {
 
-    public Benutzer anmelden(String email, String passwort) throws SemantikException {
-        String[] out = Tool.execPHP( "http://localhost/select.php?query=anmelden&email="+Tool.decodeURL(email));
 
+    public Benutzer anmelden(String email, String passwort) throws SemantikException, IOException {
+        String dataset = Tool.callLinkSingleString("select.php?query=anmelden&email="+Tool.decodeURL(email));
+        String[] split = dataset.split(";");
         try {
-            if (!out[1].equals(Tool.passWortVerchlüsselung(passwort))){
+            if (!split[1].equals(Tool.passWortVerchlüsselung(passwort))){
                 throw new SemantikException("password or email is incorrect!");
             }
 
-            return Tool.createBenutzer(out);
+            return Tool.createBenutzer(split);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
@@ -29,19 +31,17 @@ class UserVerwaltungDelegate {
     }
 
     public void regristieren(Benutzer user) {
-        String[] nutzer = Tool.aufdröselnBenutzer(user);
 
         try {
             JSONObject jo = Util.fuellenKoordinaten(user);
             JSONObject bottomRight = jo.getJSONObject("MetalInfo").getJSONObject("View").getJSONObject("Result").getJSONObject("Relevance").getJSONObject("LocationId").getJSONObject("MapView").getJSONObject("BottomRight");
-            nutzer[8]=bottomRight.getString("Latitude");
-            nutzer[9]=bottomRight.getString("Longitude");
+            Tool.callLink("/regristieren?email="+user.getEmail()+"&passwort="+user.getPasswort()+"&name="+user.getName()+"&vorname="+user.getVorname()+"&plz="+user.getPlz()+"&ort"+user.getOrt()+"&strasse"+user.getStrasseHausnr()+"&adresszusatz="+user.getAdresszusatz()+"&telefonnummer="+user.getTelefonNr()+"&breitengrad="+bottomRight.getString("Latitude")+"&laengengrad=+"+bottomRight.getString("Longitude"));
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Tool.execPHP("INSERT INTO BENUTZER (EMAIL, PASSWORT, NAME, VORNAME, PLZ, ORT, STRASSE, ADRESSZUSATZ, TELEFONNUMMER, BREITENGRAD, LAENGENGRAD) VALUES ('"+nutzer[0]+ "', " +"'"+nutzer[1]+ "', " +"'"+nutzer[2]+ "', " +"'"+nutzer[3]+ "', " +"'"+nutzer[4]+ "', " +"'"+nutzer[5]+ "', " +"'"+nutzer[6]+ "', " +"'"+nutzer[7]+ "', " +"'"+nutzer[8]+ "', " +"'"+nutzer[9]+")");
 
     }
 }

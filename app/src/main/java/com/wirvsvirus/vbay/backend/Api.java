@@ -61,7 +61,7 @@ public class Api {
     }
 
     /**
-     * Der Einkauf wurde abgegeben und ist daher abgeschlossen
+     * Der Einkauf wurde abgegeben und ist daher abgeschlossen. Wird aus dem System gelöscht.
      * @param einkaufsliste
      * @throws Exception
      */
