@@ -10,6 +10,10 @@ public class Api {
 
     private static Api instance;
 
+    private UebersichtDelegate uebersichtDelegate;
+    private AnfrageDelegate anfrageDelegate;
+    private UserVerwaltungDelegate userVerwaltungDelegate;
+
     public static Api getInstance(){
         if (instance == null){
             instance = new Api();
@@ -18,35 +22,40 @@ public class Api {
     }
 
     private Api(){
-        
+        uebersichtDelegate = new UebersichtDelegate();
+        anfrageDelegate = new AnfrageDelegate();
+        userVerwaltungDelegate = new UserVerwaltungDelegate();
     }
 
     public Benutzer anmelden(String email, String passwort) throws Exception {
-        return Backend.getInstance().anmelden(email, passwort);
+        return userVerwaltungDelegate.anmelden(email, passwort);
     }
 
     public void regristieren(Benutzer user) throws Exception {
-        Backend.getInstance().regristieren(user);
+       userVerwaltungDelegate.regristieren(user);
     }
 
     public List<Einkaufsliste> lesenEinkaufslistenHelferUebersicht(Benutzer helfer)throws Exception{
-        return null;
+        return uebersichtDelegate.lesenEinkaufslistenHelferUebersicht(helfer);
     }
 
     public void einkaufAbschliessen(Einkaufsliste einkaufsliste)throws Exception{
-
+        anfrageDelegate.einkaufAbschliessen(einkaufsliste);
     }
 
     public void einkaufAbbrechen(Einkaufsliste einkaufsliste)throws Exception{
-
+        anfrageDelegate.einkaufAbbrechen(einkaufsliste);
     }
 
-    public List<Einkaufsliste> lesenEinkaufslistenUebersicht()throws Exception{
-        return null;
+    /**
+     * @return Liste der in verfügbaren Einkaufslisten, nach Entfernung sortiert
+     */
+    public List<Einkaufsliste> lesenEinkaufslistenUebersicht() throws Exception{
+        return anfrageDelegate.lesenEinkaufslistenUebersicht();
     }
 
     public void einkaufAnnehmen(Einkaufsliste einkaufsliste, Benutzer helfer)throws Exception{
-
+        anfrageDelegate.einkaufAnnehmen(einkaufsliste,helfer );
     }
 
     /**
@@ -54,19 +63,19 @@ public class Api {
      * @return Liste der in Auftrag gestellten Einkaufslisten, nach Uhrzeit sortiert
      */
     public List<Einkaufsliste> lesenEinkaufslistenBeduerftigerUebersicht(Benutzer beduerftiger) throws Exception{
-        return null;
+        return uebersichtDelegate.lesenEinkaufslistenBeduerftigerUebersicht(beduerftiger);
     }
 
-    public void abbrechenEinkaufslisteBeduerftiger(Einkaufsliste list) throws Exception{
-
+    public void abbrechenEinkaufslisteBeduerftiger(Einkaufsliste liste) throws Exception{
+        anfrageDelegate.abbrechenEinkaufslisteBeduerftiger(liste);
     }
 
     public void bearbeitenEinkaufsliste(Einkaufsliste neu) throws Exception{
-
+        anfrageDelegate.bearbeitenEinkaufsliste(neu);
     }
 
     public void erstellenEinkaufsliste(Einkaufsliste neu) throws Exception{
-        
+        anfrageDelegate.erstellenEinkaufsliste(neu);
     }
 
 }
