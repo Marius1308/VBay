@@ -31,7 +31,6 @@ public class Benutzer implements Serializable {
     this.istHelfer = istHelfer;
   }
 
-
   public String getEmail() {
         return email;
     }
