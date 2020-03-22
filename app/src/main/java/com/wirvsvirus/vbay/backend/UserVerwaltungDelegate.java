@@ -10,6 +10,7 @@ class UserVerwaltungDelegate {
          */
 
         //PASSWORT PRÜFEN
+        //rdy
         return null;
     }
 
@@ -19,5 +20,6 @@ class UserVerwaltungDelegate {
          * INSERT INTO BENUTZER (EMAIL, PASSWORT, NAME, VORNAME, PLZ, ORT, STRASSE, ADRESSZUSATZ, TELEFONNUMMER, BREITENGRAD, LAENGENGRAD) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          *
          */
+        //rdy
     }
 }

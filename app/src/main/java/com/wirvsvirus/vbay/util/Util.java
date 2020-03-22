@@ -1,42 +1,26 @@
 package com.wirvsvirus.vbay.util;
 
-import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
-import android.widget.TextView;
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class Util {
 
-    public void sortierenEintraege(Einkaufsliste[] liste, Benutzer helfer) {
+    public void sortierenEintraege(EinkaufslisteDetail[] liste, Benutzer helfer) {
 
-        Arrays.sort(liste, new Comparator<Einkaufsliste>() {
+        Arrays.sort(liste, new Comparator<EinkaufslisteDetail>() {
 
             @Override
-            public int compare(Einkaufsliste o1, Einkaufsliste o2) {
+            public int compare(EinkaufslisteDetail o1, EinkaufslisteDetail o2) {
                 try {
                     return (int) Math.max(1, Math.min(-1, getDistance(o1.getBeduerftiger(), helfer) - getDistance(o2.getBeduerftiger(), helfer)));
                 } catch (IOException|JSONException e){
