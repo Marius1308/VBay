@@ -2,11 +2,17 @@ package com.wirvsvirus.vbay.data;
 
 import java.io.Serializable;
 
-class Eintrag implements Serializable {
+public class Eintrag implements Serializable {
 
     private Integer nrEintrag;
     private String menge;
     private String bezeichnung;
+
+    public Eintrag(Integer nrEintrag, String menge, String bezeichnung) {
+        this.nrEintrag = nrEintrag;
+        this.menge = menge;
+        this.bezeichnung = bezeichnung;
+    }
 
     public Integer getNrEintrag() {
         return nrEintrag;
