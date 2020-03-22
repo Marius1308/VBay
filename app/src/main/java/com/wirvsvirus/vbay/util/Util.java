@@ -56,16 +56,13 @@ public class Util {
         return user.getLaengengrad();
     }
 
-    private void fuellenKoordinaten(Benutzer beduerftiger) throws IOException, JSONException {
+    public static JSONObject fuellenKoordinaten(Benutzer beduerftiger) throws IOException, JSONException {
 
         String apiKey = "mevuW44x45HNe9rCHCaXVIJu0kmTvokNC6gIcUFBy5o";
         String searchQuery = beduerftiger.getPlz() + "+" + beduerftiger.getOrt() + "+" + beduerftiger.getStrasseHausnr().replace(' ', '+');
         JSONObject resp = RestClient.getGeocode(searchQuery, apiKey);
         Log.d("fuellenKoordinaten", resp.toString());
-
-        speichernKoordinaten(resp);
-
-
+        return resp;
     }
 
     private void speichernKoordinaten(JSONObject resp) {
