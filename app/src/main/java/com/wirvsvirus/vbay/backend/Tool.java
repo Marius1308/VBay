@@ -1,6 +1,7 @@
 package com.wirvsvirus.vbay.backend;
 
 import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.data.Einkaufsliste;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,6 +12,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,7 +27,7 @@ public class Tool {
         }
     }
 
-    public static String decodeURL(String url) throws MalformedURLException {
+    public static String decodeURL(String url)  {
         try {
             String prevURL="";
             String decodeURL=url;
@@ -66,6 +68,10 @@ public class Tool {
         return new String[]{""};
     }
 
+    public static String execPHPString(String s){
+        return "";
+    }
+
     public static String passWortVerchlüsselung(String passwort) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(passwort.trim().getBytes());
@@ -89,5 +95,17 @@ public class Tool {
 
     public static String[] aufdröselnBenutzer(Benutzer n){
         return new String[]{n.getEmail(),n.getName(),n.getVorname(),""+n.getPlz(),n.getOrt(),n.getStrasseHausnr(),n.getTelefonNr(),""+n.getBreitengrad(),""+n.getLaengengrad()};
+    }
+
+    public static Einkaufsliste createEinkaufsliste(String[] param){
+//        Einkaufsliste liste = new Einkaufsliste();
+//        liste.setBeduerftiger(param[0]);
+//        liste.setUhrVon(param[1]);
+//        liste.setUhrBis(new LocalDateTime(param[2]));
+        return new Einkaufsliste();
+    }
+
+    public static String[] aufdröselnEinkaufsliste(Einkaufsliste l){
+        return new String[]{l.getBeduerftiger().getEmail(),""+l.getUhrVon(),""+l.getUhrBis()};
     }
 }

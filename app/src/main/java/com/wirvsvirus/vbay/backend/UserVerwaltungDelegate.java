@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 class UserVerwaltungDelegate {
 
     public Benutzer anmelden(String email, String passwort) throws SemantikException {
-        String[] out = Tool.execPHP("SELECT * FROM BENUTZER WHERE EMAIL='"+email+"'");
+        String[] out = Tool.execPHP( "http://localhost/select.php?query=anmelden&email="+Tool.decodeURL(email));
 
         try {
             if (!out[1].equals(Tool.passWortVerchlüsselung(passwort))){
