@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -55,16 +56,13 @@ public class Util {
         return user.getLaengengrad();
     }
 
-    private void fuellenKoordinaten(Benutzer beduerftiger) throws IOException, JSONException {
+    public static JSONObject fuellenKoordinaten(Benutzer beduerftiger) throws IOException, JSONException {
 
         String apiKey = "mevuW44x45HNe9rCHCaXVIJu0kmTvokNC6gIcUFBy5o";
         String searchQuery = beduerftiger.getPlz() + "+" + beduerftiger.getOrt() + "+" + beduerftiger.getStrasseHausnr().replace(' ', '+');
         JSONObject resp = RestClient.getGeocode(searchQuery, apiKey);
         Log.d("fuellenKoordinaten", resp.toString());
-
-        speichernKoordinaten(resp);
-
-
+        return resp;
     }
 
     private void speichernKoordinaten(JSONObject resp) {
@@ -85,6 +83,6 @@ public class Util {
         dist = dist * 60 * 1.1515 * 1.609344;
         return dist;
     }
-
+    
 
 }

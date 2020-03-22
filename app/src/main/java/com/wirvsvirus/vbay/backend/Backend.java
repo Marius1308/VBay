@@ -102,14 +102,14 @@ public class Backend {
         }
     }
 
-    public void passWortVerchlüsselung(String passwort) throws NoSuchAlgorithmException {
+    public static void passWortVerchlüsselung(String passwort) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(passwort.trim().getBytes());
         byte[] hash = md.digest();
         System.out.println(new String(hash));
     }
 
-    public String encodeURL(String url) throws MalformedURLException {
+    public static String encodeURL(String url) throws MalformedURLException {
         try {
             String encodeURL= URLEncoder.encode( url, "UTF-8" );
             return encodeURL;
@@ -118,7 +118,7 @@ public class Backend {
         }
     }
 
-    public String decodeURL(String url) throws MalformedURLException {
+    public static String decodeURL(String url) throws MalformedURLException {
         try {
             String prevURL="";
             String decodeURL=url;
@@ -133,7 +133,7 @@ public class Backend {
         }
     }
 
-    public List<String> execPHP() throws IOException {
+    public static List<String> execPHP() throws IOException {
         URL url = new URL("https://localhost/insert.php?query=INSERT+INTO+%60eintrag%60+%28%60NR_EINKAUFSLISTE%60%2C+%60MENGE%60%2C+%60BEZEICHNUNG%60%29+VALUES+%28%271%27%2C+%271+Liter%27%2C+%27Wasser%27%29");
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("GET");

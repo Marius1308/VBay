@@ -44,6 +44,7 @@ class AnfrageDelegate {
             DELETE FROM EINKAUFSLISTE
             WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
          */
+        //rdy
     }
 
     public void bearbeitenEinkaufsliste(EinkaufslisteDetail neu) {
@@ -56,6 +57,8 @@ class AnfrageDelegate {
         /*
         INSERT INTO EINTRAG (EMAIL, NR_EINKAUFSLISTE, MENGE, BEZEICHNUNG) VALUES (?, ?, ?, ?)
          */
+
+        //rdy
     }
 
     public void erstellenEinkaufsliste(EinkaufslisteDetail neu) {
@@ -69,5 +72,7 @@ class AnfrageDelegate {
         /*
         INSERT INTO EINTRAG (EMAIL, NR_EINKAUFSLISTE, MENGE, BEZEICHNUN) VALUES (?, ?, ?, ?)
          */
+
+        //rdy
     }
 }
