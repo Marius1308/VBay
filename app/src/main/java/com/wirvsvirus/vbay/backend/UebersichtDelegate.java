@@ -67,4 +67,8 @@ public class UebersichtDelegate {
          //rdy
         return null;
     }
+
+    public List<EinkaufslisteDetail> lesenDetailUebersicht(Benutzer helfer) {
+        return null;
+    }
 }
