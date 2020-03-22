@@ -45,7 +45,7 @@ public class AktiveEinkaefe extends AppCompatActivity {
     LinearLayout rowInfo = new LinearLayout(this);
     rowInfo.setOrientation(LinearLayout.VERTICAL);
 
-    
+
     TextView nameText = new TextView(this);
     TextView beschreibungText = new TextView(this);
     Button detail = new Button(this);
