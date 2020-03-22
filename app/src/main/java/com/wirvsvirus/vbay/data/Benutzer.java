@@ -89,6 +89,25 @@ public class Benutzer implements Serializable {
         this.telefonNr = telefonNr;
     }
 
+    private Double breitengrad;
+    private Double laengengrad;
+
+    public Double getBreitengrad() {
+        return breitengrad;
+    }
+
+    public void setBreitengrad(Double breitengrad) {
+        this.breitengrad = breitengrad;
+    }
+
+    public Double getLaengengrad() {
+        return laengengrad;
+    }
+
+    public void setLaengengrad(Double laengengrad) {
+        this.laengengrad = laengengrad;
+    }
+
     public String getPasswort(){
         return passwort;
     }

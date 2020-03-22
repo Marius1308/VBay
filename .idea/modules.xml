@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VBay.iml" filepath="$PROJECT_DIR$/VBay.iml" group="VBay" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="VBay/app" />
+      <module fileurl="file://$PROJECT_DIR$/mysql-connector-java-8.0.19/mysql-connector-java-8.0.19.iml" filepath="$PROJECT_DIR$/mysql-connector-java-8.0.19/mysql-connector-java-8.0.19.iml" group="VBay/mysql-connector-java-8.0.19" />
     </modules>
   </component>
 </project>
