@@ -35,7 +35,7 @@ public class newListInDetail extends AppCompatActivity {
     benutzer = (Benutzer) extras.getSerializable("benutzer");
     liste = (EinkaufslisteUebersicht) extras.getSerializable("liste");
 
-    einkaufslisteDetail = Api.getInstance().le
+    einkaufslisteDetail = Api.getInstance().lesenDetail(liste);
 
     accept.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -48,7 +48,11 @@ public class newListInDetail extends AppCompatActivity {
 
   private void acceptList(){
 
-    Api.getInstance().einkaufAnnehmen(liste, benutzer);
+    try {
+      Api.getInstance().einkaufAnnehmen(einkaufslisteDetail, benutzer);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     Intent intent;
     intent = new Intent(this, MenuHelfer.class);
