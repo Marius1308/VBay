@@ -8,13 +8,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.marius.vbay.R;
+import com.wirvsvirus.vbay.backend.Api;
+import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 public class newListInDetail extends AppCompatActivity {
 
   TextView descriptionDetailText;
   TextView nameText;
-  Button backToList;
   Button accept;
+  Benutzer benutzer;
+  EinkaufslisteUebersicht liste;
+  EinkaufslisteDetail einkaufslisteDetail;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +29,13 @@ public class newListInDetail extends AppCompatActivity {
 
     descriptionDetailText = (TextView) findViewById(R.id.descriptionAbschluss);
     nameText = (TextView) findViewById(R.id.nameDetail);
-    backToList = (Button) findViewById(R.id.backDetail);
     accept = (Button) findViewById(R.id.acceptDetail);
 
     Bundle extras = getIntent().getExtras();
-    descriptionDetailText.setText("Beschreibung: " + extras.getString("description"));
+    benutzer = (Benutzer) extras.getSerializable("benutzer");
+    liste = (EinkaufslisteUebersicht) extras.getSerializable("liste");
 
-    backToList.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        backToOverview();
-      }
-    });
+    einkaufslisteDetail = Api.getInstance().lesenDetail(liste);
 
     accept.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -45,16 +46,18 @@ public class newListInDetail extends AppCompatActivity {
 
   }
 
-  private void backToOverview(){
-    Intent intent;
-    intent = new Intent(this, EinkaufUebersicht.class);
-    startActivity(intent);
-  }
-
   private void acceptList(){
+
+    try {
+      Api.getInstance().einkaufAnnehmen(einkaufslisteDetail, benutzer);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     Intent intent;
     intent = new Intent(this, MenuHelfer.class);
     startActivity(intent);
+
   }
 
   @Override

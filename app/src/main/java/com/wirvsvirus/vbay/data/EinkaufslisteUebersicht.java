@@ -1,9 +1,10 @@
 package com.wirvsvirus.vbay.data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class EinkaufslisteUebersicht {
+public class EinkaufslisteUebersicht implements Serializable{
 
     private String emailBeduerftiger;
     private String nameBeduerftiger;
