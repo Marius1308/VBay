@@ -12,6 +12,7 @@ public class Benutzer implements Serializable {
     private String adresszusatz;
     private String telefonNr;
     private String passwort;
+    private Boolean istHelfer; //TODO
 
     public Benutzer(String email, String name, String vorname, Integer plz, String ort, String strasseHausnr, String adresszusatz, String telefonNr, String passwort) {
         this.email = email;

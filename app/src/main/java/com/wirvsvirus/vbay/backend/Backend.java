@@ -1,14 +1,17 @@
 package com.wirvsvirus.vbay.backend;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import com.wirvsvirus.vbay.data.*;
 
@@ -30,15 +33,15 @@ public class Backend {
     }
 
     public static void main(String[] args) {
-        Backend backend = new Backend();
-        System.out.println(backend.test());
+        System.out.println(Backend.getInstance().test());
     }
 
-    public void anmelden(String email, String passwort) throws Exception {
+    public Benutzer anmelden(String email, String passwort) throws Exception {
         // Datenbank durchsuchen
         if (!passwort.trim().equals(stmt.executeQuery("SELECT passwort FROM BENUTZER WHERE EMAIL='" + email + "'").getString("PASSWORT").trim()))
             ; // +email
         // throw new Exception;
+        return null;
     }
 
     public void regristieren(Benutzer user) throws Exception {
@@ -129,23 +132,23 @@ public class Backend {
         }
     }
 
-    public String execPHP(String scriptName, String param) {
-        StringBuilder output= null;
-        try {
-            String line;
-            output = new StringBuilder();
-            Process p = Runtime.getRuntime().exec("php " + scriptName + " " + param);
-            BufferedReader input =
-                    new BufferedReader
-                            (new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-                output.append(line);
-            }
-            input.close();
+    public List<String> execPHP() throws IOException {
+        URL url = new URL("https://localhost/insert.php?query=INSERT+INTO+%60eintrag%60+%28%60NR_EINKAUFSLISTE%60%2C+%60MENGE%60%2C+%60BEZEICHNUNG%60%29+VALUES+%28%271%27%2C+%271+Liter%27%2C+%27Wasser%27%29");
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.connect();
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200){
+            throw new RuntimeException("Fehler (HttpResponseCode: "+ responseCode + ") Location kann nicht interpretiert werden");
         }
-        catch (Exception err) {
-            err.printStackTrace();
+
+        Scanner sc = new Scanner(url.openStream());
+        List<String> out = new ArrayList<>();
+        while(sc.hasNext())
+        {
+            out.add(sc.nextLine());
         }
-        return output.toString();
+        sc.close();
+        return out;
     }
 }
