@@ -81,7 +81,7 @@ public class SignUp extends AppCompatActivity {
 
     } catch (Exception e) {
       e.printStackTrace();
-      //openErrorDialog(e.getMessage());
+      openErrorDialog(e.getMessage());
       //return; //Todo Use
     }
 
@@ -92,7 +92,7 @@ public class SignUp extends AppCompatActivity {
   }
 
   private Benutzer erstelleBenutzer(){
-    return new Benutzer(etEmail.getText().toString(), etName.getText().toString(), "Vorname", 1234,"Ort","StrasseHausnr", "AdressZusatz", "telefonNr", etPasswort.getText().toString());
+    return new Benutzer(etEmail.getText().toString(), etName.getText().toString(), "Vorname", 1234,"Ort","StrasseHausnr", "AdressZusatz", "telefonNr", etPasswort.getText().toString(), true);
   }
 
   @Override

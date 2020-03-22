@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.marius.vbay.R;
 import com.wirvsvirus.vbay.backend.Api;
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 import com.wirvsvirus.vbay.data.Eintrag;
 
 import java.time.LocalDateTime;
@@ -58,12 +58,12 @@ public class AktiveEinkaefe extends AppCompatActivity {
   private void updateListe(){
     meineEinkaeufe.removeAllViews();
 
-    List<Einkaufsliste> listen;
+    List<EinkaufslisteUebersicht> listen;
 
     try {
       listen = Api.getInstance().lesenEinkaufslistenHelferUebersicht(benutzer);
-      for(Einkaufsliste liste: listen){
-        addToMeineEinkaefe(liste.getBeduerftiger().getVorname() + " " + liste.getBeduerftiger().getName(), liste.getUhrVon().toString(), liste.getUhrBis().toString(), liste);
+      for(EinkaufslisteUebersicht liste: listen){
+        addToMeineEinkaefe(liste.getVornameBeduerftiger() + " " + liste.getNameBeduerftiger(), liste.getUhrVon().toString(), liste.getUhrBis().toString(), liste);
       }
 
     } catch (Exception e) {
@@ -72,7 +72,7 @@ public class AktiveEinkaefe extends AppCompatActivity {
 
   }}
 
-  private void addToMeineEinkaefe(String name, final String uhrBis, final String uhrVon, Einkaufsliste liste){
+  private void addToMeineEinkaefe(String name, final String uhrBis, final String uhrVon, EinkaufslisteUebersicht liste){
     LinearLayout newRow = new LinearLayout(this);
     LinearLayout rowInfo = new LinearLayout(this);
     rowInfo.setOrientation(LinearLayout.VERTICAL);
@@ -113,7 +113,7 @@ public class AktiveEinkaefe extends AppCompatActivity {
     meineEinkaeufe.addView(newRow, layoutParams);
   }
 
-  private void showDetailPage(Einkaufsliste liste){
+  private void showDetailPage(EinkaufslisteUebersicht liste){
 
     if(liste != null){
       Intent intent;

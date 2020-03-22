@@ -10,7 +10,8 @@ import android.widget.TextView;
 import com.example.marius.vbay.R;
 import com.wirvsvirus.vbay.backend.Api;
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
+import com.wirvsvirus.vbay.data.Eintrag;
 
 import java.util.List;
 
@@ -33,9 +34,6 @@ public class MenuHelfer extends AppCompatActivity {
 
     Bundle extras = getIntent().getExtras();
     benutzer = (Benutzer) extras.getSerializable("benutzer");
-
-
-
     annehmen.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -60,7 +58,17 @@ public class MenuHelfer extends AppCompatActivity {
 
   private void updateListe() {
     try {
-      List<Einkaufsliste> einkaufslisten =  Api.getInstance().lesenEinkaufslistenHelferUebersicht(benutzer);
+      List<EinkaufslisteDetail> einkaufslisten =  Api.getInstance().lesenDetailUebersicht(benutzer);
+
+      String text = "";
+      for(EinkaufslisteDetail liste: einkaufslisten){
+        text +="Einkauf von " +  liste.getBeduerftiger().getVorname() + " " + liste.getBeduerftiger().getName() + "\n";
+        for(Eintrag eintrag: liste.getEintraege()){
+            text += "\t-"+ eintrag.getMenge() + " " + eintrag.getBezeichnung() + "\n";
+        }
+      }
+      liste.setText(text);
+
     } catch (Exception e) {
       e.printStackTrace();
       liste.setText(e.getMessage());

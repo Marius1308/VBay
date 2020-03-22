@@ -12,11 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.marius.vbay.R;
+import com.wirvsvirus.vbay.backend.Api;
+import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 public class EinkaufUebersicht extends AppCompatActivity {
   LinearLayout layout;
   int width;
   int height;
+  Benutzer benutzer;
   LinearLayout.LayoutParams layoutParams;
 
   @Override
@@ -24,6 +28,9 @@ public class EinkaufUebersicht extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_einkauf_uebersicht);
     layout = (LinearLayout) findViewById(R.id.listEinkaeufe);
+
+    Bundle extras = getIntent().getExtras();
+    benutzer = (Benutzer) extras.getSerializable("benutzer");
 
     layoutParams = new LinearLayout.LayoutParams(layout.getLayoutParams());
     layoutParams.setMargins(0,0,0,20);
@@ -36,26 +43,18 @@ public class EinkaufUebersicht extends AppCompatActivity {
   }
 
   private void setList(){
-    //layout.removeAllViews();
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
-    addToList("20km","12.07.2020", "Eine Milch");
-    addToList("200km","12.07.2020", "Eins Einkauf bitte");
+    layout.removeAllViews();
+
+    try {
+      for(EinkaufslisteUebersicht liste : Api.getInstance().lesenEinkaufslistenUebersicht(benutzer)){
+        addToList(liste);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
-  private void addToList(String distance, String date, final String description){
+  private void addToList(EinkaufslisteUebersicht liste){
     LinearLayout newRow = new LinearLayout(this);
     LinearLayout rowInfo = new LinearLayout(this);
     rowInfo.setOrientation(LinearLayout.VERTICAL);
@@ -64,9 +63,9 @@ public class EinkaufUebersicht extends AppCompatActivity {
     TextView dateText = new TextView(this);
     TextView nameText = new TextView(this);
     Button detail = new Button(this);
-    distanceText.setText("Entfernung: " + distance);
-    dateText.setText("Datum: "+ date);
-    nameText.setText("Beschreibung: " + description);
+    distanceText.setText("Entfernung: " + liste.getEntfernung());
+    dateText.setText("Von: "+ liste.getUhrVon());
+    nameText.setText("Bis: " + liste.getUhrBis());
     detail.setText("Show");
     detail.setLayoutParams(new ViewGroup.LayoutParams(
       ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -79,7 +78,7 @@ public class EinkaufUebersicht extends AppCompatActivity {
     detail.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-          showDetailPage(description);
+          showDetailPage(liste);
       }
     });
 
@@ -93,10 +92,11 @@ public class EinkaufUebersicht extends AppCompatActivity {
     layout.addView(newRow, layoutParams);
   }
 
-  private void showDetailPage(String description){
+  private void showDetailPage(EinkaufslisteUebersicht liste){
     Intent intent;
     intent = new Intent(this, newListInDetail.class);
-    intent.putExtra("description", description);
+    intent.putExtra("benutzer", benutzer);
+    intent.putExtra("liste", liste);
     startActivity(intent);
   }
 

@@ -23,15 +23,10 @@
       android:layout_weight="1">
 
       <LinearLayout
+        android:id="@+id/neueListe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-          android:id="@+id/neueListe"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
-      </LinearLayout>
+        android:orientation="vertical" />
     </ScrollView>
 
     <LinearLayout

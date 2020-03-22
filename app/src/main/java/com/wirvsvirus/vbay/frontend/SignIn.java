@@ -41,26 +41,24 @@ public class SignIn extends AppCompatActivity {
     super.onStart();
   }
 
-  Benutzer benutzer = new Benutzer("a@b.de", "max", "muster",123345, "qwertz", "asd 11", "", "12346123", "1234");
 
   public void onLoginPress(){
 
     try {
 
-     //benutzer = Api.getInstance().anmelden(etEmail.getText().toString(), etPasswort.getText().toString());
-      Api.getInstance().anmelden(etEmail.getText().toString(), etPasswort.getText().toString()); // Todo switch
+      Intent intent;
+      intent = new Intent(this, MenuHelfer.class);
+      intent.putExtra("benutzer",  Api.getInstance().anmelden(etEmail.getText().toString(), etPasswort.getText().toString()));
+      intent.putExtra("a", false);
+      startActivity(intent);// Todo switch
 
     } catch (Exception e){
-      //openErrorDialog(e.getMessage());
-      //return //Todo Use
+      openErrorDialog(e.getMessage());
+      return;
 
     }
 
-    Intent intent;
-    intent = new Intent(this, MenuHelfer.class);
-    intent.putExtra("benutzer", benutzer);
-    intent.putExtra("a", false);
-    startActivity(intent);
+
 
   }
 

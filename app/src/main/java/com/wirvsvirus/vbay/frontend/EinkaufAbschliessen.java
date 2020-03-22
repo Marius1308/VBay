@@ -17,9 +17,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 //import com.mysql.jdbc.Driver;
 import com.wirvsvirus.vbay.backend.Api;
-import com.wirvsvirus.vbay.backend.Backend;
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
+import com.wirvsvirus.vbay.data.Eintrag;
 
 public class EinkaufAbschliessen extends AppCompatActivity {
 
@@ -27,7 +28,8 @@ public class EinkaufAbschliessen extends AppCompatActivity {
   Button abschluss;
   Button abbruch;
   Benutzer benutzer;
-  Einkaufsliste liste;
+  EinkaufslisteUebersicht liste;
+  EinkaufslisteDetail listeDetail;
   TextView nameText;
   TextView beschreibungText;
   TextView entfernungText;
@@ -52,8 +54,8 @@ public class EinkaufAbschliessen extends AppCompatActivity {
 
 
     Bundle extras = getIntent().getExtras();
-    //benutzer = (Benutzer) extras.getSerializable("benutzer");
-    //liste = (Einkaufsliste) extras.getSerializable("liste");
+    benutzer = (Benutzer) extras.getSerializable("benutzer");
+    liste = (EinkaufslisteUebersicht) extras.getSerializable("liste");
 
     abbruch.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -68,40 +70,37 @@ public class EinkaufAbschliessen extends AppCompatActivity {
         einkaufAbschluss();
       }
     });
-
-    nameText.setText("Name: Max Muster" );
-    beschreibungText.setText("Beschreibung: Mein Wocheneinkauf");
-    entfernungText.setText("Entfernung: 7 km" ); //todo
-    vonText.setText("01.04.20");
-    bisText.setText("05.06.20");
-    listeText.setText("-2L Milch\n\t -1 Mehl \n\t -6 Eier \n\t -7 Toilettenpapier");
-
-    //updateDetails(); // TODo Switch
  }
 
  private void updateDetails(){
-    nameText.setText("Name: " + liste.getBeduerftiger().getVorname() + " " + liste.getBeduerftiger().getName());
-    beschreibungText.setText("Beschreibung: " + liste.getNrEinkaufsliste());
-    entfernungText.setText("Entfernung: " + "todo"); //todo
-    vonText.setText(liste.getUhrVon().toString());
-    bisText.setText(liste.getUhrBis().toString());
 
-      //Todo einträge von liste
+    nameText.setText("Name: " + listeDetail.getBeduerftiger().getVorname() + " " + listeDetail.getBeduerftiger().getName());
+    beschreibungText.setText("Beschreibung: " + listeDetail.getNrEinkaufsliste());
+    entfernungText.setText("Entfernung: " + "todo"); //todo
+    vonText.setText(listeDetail.getUhrVon().toString());
+    bisText.setText(listeDetail.getUhrBis().toString());
+
+    String text = "";
+    for(Eintrag eintrag: listeDetail.getEintraege()){
+      text +=  "\t-" + eintrag.getMenge() + " " + eintrag.getBezeichnung() + " \n";
+    }
+      listeText.setText(text);
  }
 
   @Override
   protected void onStart() {
     super.onStart();
     Bundle extras = getIntent().getExtras();
-    //benutzer = (Benutzer) extras.getSerializable("benutzer");
-    //liste = (Einkaufsliste) extras.getSerializable("liste");
+    benutzer = (Benutzer) extras.getSerializable("benutzer");
+    liste = (EinkaufslisteUebersicht) extras.getSerializable("liste");
+    listeDetail = Api.getInstance().lesenDetail(liste);
 
-   // updateDetails();
+    updateDetails();
   }
 
   private void einkaufAbbruch(){
    try {
-     Api.getInstance().einkaufAbbrechen(liste);
+     Api.getInstance().einkaufAbbrechen(listeDetail);
    } catch (Exception e) {
      e.printStackTrace();
    }
@@ -115,7 +114,7 @@ public class EinkaufAbschliessen extends AppCompatActivity {
 
   private void einkaufAbschluss(){
     try {
-      Api.getInstance().einkaufAbschliessen(liste);
+      Api.getInstance().einkaufAbschliessen(listeDetail);
     } catch (Exception e) {
       e.printStackTrace();
     }
