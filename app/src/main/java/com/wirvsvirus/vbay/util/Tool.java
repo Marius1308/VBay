@@ -1,7 +1,8 @@
-package com.wirvsvirus.vbay.backend;
+package com.wirvsvirus.vbay.util;
+
+import android.util.Log;
 
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tool {
+    private static final String serverEndpoint = "http://localhost/";
     public static String encodeURL(String url) throws MalformedURLException {
         try {
             String encodeURL= URLEncoder.encode( url, "UTF-8" );
@@ -43,34 +45,32 @@ public class Tool {
         }
     }
 
-    public static List<String> execPHP() throws IOException {
-        URL url = new URL("https://localhost/insert.php?query=INSERT+INTO+%60eintrag%60+%28%60NR_EINKAUFSLISTE%60%2C+%60MENGE%60%2C+%60BEZEICHNUNG%60%29+VALUES+%28%271%27%2C+%271+Liter%27%2C+%27Wasser%27%29");
+    public static List<String> callLink(String link) throws IOException {
+        URL url = new URL(serverEndpoint + link);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("GET");
         conn.connect();
         int responseCode = conn.getResponseCode();
         if (responseCode != 200){
-            throw new RuntimeException("Fehler (HttpResponseCode: "+ responseCode + ") Location kann nicht interpretiert werden");
+            throw new RuntimeException("Fehler (HttpResponseCode: "+ responseCode + ")");
         }
-
-
 
         Scanner sc = new Scanner(url.openStream());
         List<String> out = new ArrayList<>();
         while(sc.hasNext())
         {
             out.add(sc.nextLine());
+            Log.d("callLinkResponse", out.get(out.size() - 1));
         }
         sc.close();
         return out;
     }
 
-    public static String[] execPHP(String s){
-        return new String[]{""};
-    }
+//    public static String[] execPHP(String s){
+//        return new String[]{""};
+//    }
 
-    public static String execPHPString(String s){
-        return "";
+    public static String callLinkSingleString(String s) throws IOException {
+        return callLink(s).get(0);
     }
 
     public static String passWortVerchlüsselung(String passwort) throws NoSuchAlgorithmException {

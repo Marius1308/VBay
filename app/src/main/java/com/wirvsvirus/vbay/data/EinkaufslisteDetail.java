@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class Einkaufsliste implements Serializable {
+public class EinkaufslisteDetail implements Serializable {
 
     private Benutzer beduerftiger;
     private int nrEinkaufsliste;
@@ -14,7 +14,7 @@ public class Einkaufsliste implements Serializable {
 
     private Optional<Benutzer> helfer;
 
-    public Einkaufsliste(Benutzer beduerftiger, int nrEinkaufsliste, LocalDateTime uhrVon, Eintrag[] eintraege, LocalDateTime uhrBis) {
+    public EinkaufslisteDetail(Benutzer beduerftiger, int nrEinkaufsliste, LocalDateTime uhrVon, Eintrag[] eintraege, LocalDateTime uhrBis) {
         this.beduerftiger = beduerftiger;
         this.nrEinkaufsliste = nrEinkaufsliste;
         this.uhrVon = uhrVon;

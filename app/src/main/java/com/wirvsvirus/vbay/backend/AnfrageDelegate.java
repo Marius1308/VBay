@@ -6,7 +6,7 @@ import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 import java.util.List;
 
-class AnfrageDelegate {
+public class AnfrageDelegate {
 
     public void einkaufAbschliessen(EinkaufslisteDetail einkaufsliste) {
         /*
@@ -17,6 +17,8 @@ class AnfrageDelegate {
             DELETE FROM EINKAUFSLISTE
             WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
          */
+
+        //rdy
     }
 
     public void einkaufAbbrechen(EinkaufslisteDetail einkaufsliste) {
@@ -24,6 +26,8 @@ class AnfrageDelegate {
         UPDATE EINKAUFSLISTE SET EMAIL_HELFER = (NULL)
         WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
          */
+
+        //rdy
     }
 
 
@@ -33,6 +37,8 @@ class AnfrageDelegate {
         UPDATE EINKAUFSLISTE SET EMAIL_HELFER = ?
         WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
          */
+
+        //rdy
     }
 
     public void abbrechenEinkaufslisteBeduerftiger(EinkaufslisteDetail liste) {
@@ -50,7 +56,7 @@ class AnfrageDelegate {
     public void bearbeitenEinkaufsliste(EinkaufslisteDetail neu) {
          /*
             DELETE FROM EINTRAG
-            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
+            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?*
          */
 
         //for-each
@@ -59,6 +65,8 @@ class AnfrageDelegate {
          */
 
         //rdy
+
+
     }
 
     public void erstellenEinkaufsliste(EinkaufslisteDetail neu) {
