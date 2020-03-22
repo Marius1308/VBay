@@ -2,6 +2,7 @@ package com.wirvsvirus.vbay.data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class Einkaufsliste implements Serializable {
 
@@ -10,6 +11,8 @@ public class Einkaufsliste implements Serializable {
     private LocalDateTime uhrVon;
     private LocalDateTime uhrBis;
     private Eintrag[] eintraege;
+
+    private Optional<Benutzer> helfer;
 
     public Einkaufsliste(Benutzer beduerftiger, int nrEinkaufsliste, LocalDateTime uhrVon, Eintrag[] eintraege, LocalDateTime uhrBis) {
         this.beduerftiger = beduerftiger;

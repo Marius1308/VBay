@@ -19,14 +19,34 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.data.Einkaufsliste;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Util {
+
+    public void sortierenEintraege(Einkaufsliste[] liste, Benutzer helfer) {
+
+        Arrays.sort(liste, new Comparator<Einkaufsliste>() {
+
+            @Override
+            public int compare(Einkaufsliste o1, Einkaufsliste o2) {
+                try {
+                    return (int) Math.max(1, Math.min(-1, getDistance(o1.getBeduerftiger(), helfer) - getDistance(o2.getBeduerftiger(), helfer)));
+                } catch (IOException|JSONException e){
+                    e.printStackTrace();
+                    return 0;
+                }
+            }
+        });
+
+    }
 
     public Double getDistance(Benutzer beduerftiger, Benutzer helfer) throws IOException, JSONException {
 
