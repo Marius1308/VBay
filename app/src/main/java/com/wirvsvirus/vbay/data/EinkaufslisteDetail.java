@@ -4,17 +4,42 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class Einkaufsliste implements Serializable {
+public class EinkaufslisteDetail implements Serializable {
 
-    private Benutzer beduerftiger;
+
     private int nrEinkaufsliste;
     private LocalDateTime uhrVon;
     private LocalDateTime uhrBis;
     private Eintrag[] eintraege;
-
+    private Benutzer beduerftiger;
     private Optional<Benutzer> helfer;
+    private double entfernung;
 
-    public Einkaufsliste(Benutzer beduerftiger, int nrEinkaufsliste, LocalDateTime uhrVon, Eintrag[] eintraege, LocalDateTime uhrBis) {
+    public Eintrag[] getEintraege() {
+        return eintraege;
+    }
+
+    public void setEintraege(Eintrag[] eintraege) {
+        this.eintraege = eintraege;
+    }
+
+    public Optional<Benutzer> getHelfer() {
+        return helfer;
+    }
+
+    public void setHelfer(Optional<Benutzer> helfer) {
+        this.helfer = helfer;
+    }
+
+    public double getEntfernung() {
+        return entfernung;
+    }
+
+    public void setEntfernung(double entfernung) {
+        this.entfernung = entfernung;
+    }
+
+    public EinkaufslisteDetail(Benutzer beduerftiger, int nrEinkaufsliste, LocalDateTime uhrVon, Eintrag[] eintraege, LocalDateTime uhrBis) {
         this.beduerftiger = beduerftiger;
         this.nrEinkaufsliste = nrEinkaufsliste;
         this.uhrVon = uhrVon;
