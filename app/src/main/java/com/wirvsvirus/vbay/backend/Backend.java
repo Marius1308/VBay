@@ -19,7 +19,7 @@ public class Backend {
 
     private Statement stmt;
     private static Backend backend;
-    private ArrayList<Einkaufsliste> einkauflisten = new ArrayList<>();
+    private ArrayList<EinkaufslisteDetail> einkauflisten = new ArrayList<>();
 
     private Backend() {
 
@@ -55,13 +55,13 @@ public class Backend {
         // PW Hashen?!
     }
 
-    public void einkaufslisteAnlegen(Einkaufsliste list) throws Exception {
+    public void einkaufslisteAnlegen(EinkaufslisteDetail list) throws Exception {
         // Datenbankeintrag anlegen
         stmt.executeUpdate(
                 "INSERT INTO EINKAUFSLISTE(EMAIL, VON, BIS) VALUES ('"+list.getBeduerftiger().getEmail()+"', timestampValueOf("+list.getUhrBis()+"), timeStampValueOf("+list.getUhrVon()+"))");
     }
 
-    public Einkaufsliste EinkaufslisteAbrufen(int id) throws Exception {
+    public EinkaufslisteDetail EinkaufslisteAbrufen(int id) throws Exception {
         ResultSet rs = stmt.executeQuery("SELECT * FROM EINKAUFSLISTE WHERE NR_EINKAUFSLISTE=" +id);
         rs.first();
        // Vektor anzeige = new Vector();
@@ -72,17 +72,17 @@ public class Backend {
         return null;
     }
 
-    public Einkaufsliste[] anzeigeÜbersicht() {
+    public EinkaufslisteDetail[] anzeigeÜbersicht() {
         return null;
     }  // Lars
 
 
-    public void einkaufslisteAnnehmen(Einkaufsliste liste){
+    public void einkaufslisteAnnehmen(EinkaufslisteDetail liste){
         einkauflisten.add(liste);
     }
 
-    public Einkaufsliste[] getAkzeptierteEinkaufsliste(){
-        return (Einkaufsliste[]) einkauflisten.toArray();
+    public EinkaufslisteDetail[] getAkzeptierteEinkaufsliste(){
+        return (EinkaufslisteDetail[]) einkauflisten.toArray();
     }
 
     public int test() {

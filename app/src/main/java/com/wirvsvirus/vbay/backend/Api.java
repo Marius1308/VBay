@@ -1,8 +1,8 @@
 package com.wirvsvirus.vbay.backend;
 
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
-import com.wirvsvirus.vbay.data.Eintrag;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 import java.util.List;
 
@@ -27,54 +27,119 @@ public class Api {
         userVerwaltungDelegate = new UserVerwaltungDelegate();
     }
 
+    // ---------------- API-Schnittstelle ----------------------
+
+    /**
+     * Gibt den Benutzer mit passender email zurück. Gibt Fehler bei falschem Passwort oder nicht existierendem Benutzer
+     * @param email
+     * @param passwort
+     * @return
+     * @throws Exception
+     */
     public Benutzer anmelden(String email, String passwort) throws Exception {
         return userVerwaltungDelegate.anmelden(email, passwort);
     }
 
+    /**
+     * Registrieren des Nutzers in der DB
+     * @param user
+     * @throws Exception
+     */
     public void regristieren(Benutzer user) throws Exception {
        userVerwaltungDelegate.regristieren(user);
     }
 
-    public List<Einkaufsliste> lesenEinkaufslistenHelferUebersicht(Benutzer helfer)throws Exception{
+    /**
+     * Gebe Übersicht der vom Helfer akzeptierten Einkaufslisten
+     * @param helfer
+     * @return
+     * @throws Exception
+     */
+    public List<EinkaufslisteUebersicht> lesenEinkaufslistenHelferUebersicht(Benutzer helfer)throws Exception{
         return uebersichtDelegate.lesenEinkaufslistenHelferUebersicht(helfer);
     }
 
-    public void einkaufAbschliessen(Einkaufsliste einkaufsliste)throws Exception{
+    /**
+     * Der Einkauf wurde abgegeben und ist daher abgeschlossen
+     * @param einkaufsliste
+     * @throws Exception
+     */
+    public void einkaufAbschliessen(EinkaufslisteDetail einkaufsliste)throws Exception{
         anfrageDelegate.einkaufAbschliessen(einkaufsliste);
     }
 
-    public void einkaufAbbrechen(Einkaufsliste einkaufsliste)throws Exception{
+    /**
+     * Der Einkauf wurde angenommen, kann aber nicht erfüllt werden und muss neu zugeteilt werden
+     * @param einkaufsliste
+     * @throws Exception
+     */
+    public void einkaufAbbrechen(EinkaufslisteDetail einkaufsliste)throws Exception{
         anfrageDelegate.einkaufAbbrechen(einkaufsliste);
     }
 
     /**
-     * @return Liste der in verfügbaren Einkaufslisten, nach Entfernung sortiert
+     * @return Liste der in dem Ort verfügbaren Einkaufslisten, nach Entfernung sortiert
      */
-    public List<Einkaufsliste> lesenEinkaufslistenUebersicht() throws Exception{
-        return anfrageDelegate.lesenEinkaufslistenUebersicht();
+    public List<EinkaufslisteUebersicht> lesenEinkaufslistenUebersicht(Benutzer helfer) throws Exception{
+        return uebersichtDelegate.lesenEinkaufslistenUebersicht(helfer);
     }
 
-    public void einkaufAnnehmen(Einkaufsliste einkaufsliste, Benutzer helfer)throws Exception{
-        anfrageDelegate.einkaufAnnehmen(einkaufsliste,helfer );
+    /**
+     * Liest die detaillierten Daten einer Einkaufsliste
+     */
+    public EinkaufslisteDetail lesenDetail(EinkaufslisteUebersicht liste){
+        return uebersichtDelegate.lesenDetail(liste);
+    }
+
+    /**
+     * Liest die detaillierten Daten aller akzeptierten Einkaufslisten
+     */
+    public List<EinkaufslisteDetail> lesenDetailUebersicht(Benutzer helfer){
+        return uebersichtDelegate.lesenDetailUebersicht(helfer);
+    }
+
+    /**
+     * Helfer nimmt den Auftrag an
+     * @param einkaufsliste
+     * @param helfer
+     * @throws Exception
+     */
+    public void einkaufAnnehmen(EinkaufslisteDetail einkaufsliste, Benutzer helfer)throws Exception{
+        anfrageDelegate.einkaufAnnehmen(einkaufsliste,helfer);
     }
 
     /**
      * @param beduerftiger
      * @return Liste der in Auftrag gestellten Einkaufslisten, nach Uhrzeit sortiert
      */
-    public List<Einkaufsliste> lesenEinkaufslistenBeduerftigerUebersicht(Benutzer beduerftiger) throws Exception{
+    public List<EinkaufslisteUebersicht> lesenEinkaufslistenBeduerftigerUebersicht(Benutzer beduerftiger) throws Exception{
         return uebersichtDelegate.lesenEinkaufslistenBeduerftigerUebersicht(beduerftiger);
     }
 
-    public void abbrechenEinkaufslisteBeduerftiger(Einkaufsliste liste) throws Exception{
+    /**
+     * Bedürftiger bricht die Einkaufsliste ab, da sie nicht mehr benötigt wird und eh noch nicht angenommen wurde
+     * @param liste
+     * @throws Exception
+     */
+    public void abbrechenEinkaufslisteBeduerftiger(EinkaufslisteDetail liste) throws Exception{
         anfrageDelegate.abbrechenEinkaufslisteBeduerftiger(liste);
     }
 
-    public void bearbeitenEinkaufsliste(Einkaufsliste neu) throws Exception{
+    /**
+     * Bedürftiger möchte Änderungen an seiner Einkaufsliste vornehmen
+     * @param neu
+     * @throws Exception
+     */
+    public void bearbeitenEinkaufsliste(EinkaufslisteDetail neu) throws Exception{
         anfrageDelegate.bearbeitenEinkaufsliste(neu);
     }
 
-    public void erstellenEinkaufsliste(Einkaufsliste neu) throws Exception{
+    /**
+     * Erstellen einer neuen Einkaufsliste
+     * @param neu
+     * @throws Exception
+     */
+    public void erstellenEinkaufsliste(EinkaufslisteDetail neu) throws Exception{
         anfrageDelegate.erstellenEinkaufsliste(neu);
     }
 

@@ -14,6 +14,13 @@ public class Einkaufsliste implements Serializable {
 
     private Optional<Benutzer> helfer;
 
+    public Einkaufsliste(Benutzer beduerftiger, int nrEinkaufsliste, LocalDateTime uhrVon, Eintrag[] eintraege, LocalDateTime uhrBis) {
+        this.beduerftiger = beduerftiger;
+        this.nrEinkaufsliste = nrEinkaufsliste;
+        this.uhrVon = uhrVon;
+        this.eintraege = eintraege;
+        this.uhrBis = uhrBis;
+    }
 
     public int getNrEinkaufsliste() {
         return nrEinkaufsliste;

@@ -8,11 +8,9 @@ import java.util.List;
 class AnfrageDelegate {
 
     public void einkaufAbschliessen(Einkaufsliste einkaufsliste) {
-        //skript einkaufsliste löschen
     }
 
     public void einkaufAbbrechen(Einkaufsliste einkaufsliste) {
-        //neu zugeteilt+ update email = null
     }
 
     public List<Einkaufsliste> lesenEinkaufslistenUebersicht() {
@@ -20,7 +18,6 @@ class AnfrageDelegate {
     }
 
     public void einkaufAnnehmen(Einkaufsliste einkaufsliste, Benutzer helfer) {
-        //update email zu teilen
     }
 
     public void abbrechenEinkaufslisteBeduerftiger(Einkaufsliste liste) {
