@@ -66,7 +66,7 @@ public class Api {
     }
 
     public void erstellenEinkaufsliste(Einkaufsliste neu) throws Exception{
-
+        
     }
 
 }
