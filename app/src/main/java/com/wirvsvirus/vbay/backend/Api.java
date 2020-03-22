@@ -8,6 +8,18 @@ import java.util.List;
 
 public class Api {
 
+    private static Api instance;
+
+    public static Api getInstance(){
+        if (instance == null){
+            instance = new Api();
+        }
+        return instance;
+    }
+
+    private Api(){
+        
+    }
 
     public Benutzer anmelden(String email, String passwort) throws Exception {
         return Backend.getInstance().anmelden(email, passwort);
