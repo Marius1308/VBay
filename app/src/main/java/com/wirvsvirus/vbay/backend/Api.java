@@ -92,6 +92,13 @@ public class Api {
     }
 
     /**
+     * Liest die detaillierten Daten aller akzeptierten Einkaufslisten
+     */
+    public List<EinkaufslisteDetail> lesenDetailUebersicht(Benutzer helfer){
+        return uebersichtDelegate.lesenDetailUebersicht(helfer);
+    }
+
+    /**
      * Helfer nimmt den Auftrag an
      * @param einkaufsliste
      * @param helfer
