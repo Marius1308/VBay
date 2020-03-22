@@ -3,84 +3,38 @@ package com.wirvsvirus.vbay.backend;
 import com.wirvsvirus.vbay.data.Benutzer;
 import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
+import com.wirvsvirus.vbay.util.Tool;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AnfrageDelegate {
+class AnfrageDelegate {
 
     public void einkaufAbschliessen(EinkaufslisteDetail einkaufsliste) {
-        /*
-            DELETE FROM EINTRAG
-            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
-         */
-        /*
-            DELETE FROM EINKAUFSLISTE
-            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
-         */
-
-        //rdy
+        abbrechenEinkaufslisteBeduerftiger(einkaufsliste);
     }
 
     public void einkaufAbbrechen(EinkaufslisteDetail einkaufsliste) {
-        /*
-        UPDATE EINKAUFSLISTE SET EMAIL_HELFER = (NULL)
-        WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
-         */
-
-        //rdy
+        Tool.execPHPString( "http://localhost/updateEinkaufslisteHelfer&email_beduerftiger="+einkaufsliste.getBeduerftiger().getEmail()+"&email_helfer="+einkaufsliste.getHelfer().get().getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
+        //update email löschen in einkaufsliste
     }
-
 
 
     public void einkaufAnnehmen(EinkaufslisteDetail einkaufsliste, Benutzer helfer) {
-        /*
-        UPDATE EINKAUFSLISTE SET EMAIL_HELFER = ?
-        WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
-         */
-
-        //rdy
+        Tool.execPHPString( "http://localhost/updateEinkaufslisteHelfer&email_beduerftiger="+"&email_helfer="+helfer.getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
+        //update helfer bei einkaufsliste
     }
 
     public void abbrechenEinkaufslisteBeduerftiger(EinkaufslisteDetail liste) {
-        /*
-            DELETE FROM EINTRAG
-            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
-         */
-        /*
-            DELETE FROM EINKAUFSLISTE
-            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
-         */
-        //rdy
+        String out = Tool.execPHPString( "http://localhost/loeschenEinkaufsliste?nr_einkaufsliste="+liste.getNrEinkaufsliste());
     }
 
-    public void bearbeitenEinkaufsliste(EinkaufslisteDetail neu) {
-         /*
-            DELETE FROM EINTRAG
-            WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?*
-         */
-
-        //for-each
-        /*
-        INSERT INTO EINTRAG (EMAIL, NR_EINKAUFSLISTE, MENGE, BEZEICHNUNG) VALUES (?, ?, ?, ?)
-         */
-
-        //rdy
-
-
+    public void bearbeitenEinkaufsliste(EinkaufslisteDetail alt, EinkaufslisteDetail neu) {
+    abbrechenEinkaufslisteBeduerftiger(alt);
+    erstellenEinkaufsliste(neu);
     }
 
     public void erstellenEinkaufsliste(EinkaufslisteDetail neu) {
-        /*
-        INSERT INTO EINKAUFSLISTE (EMAIL, NR_EINKAUFSLISTE, VON, BIS) VALUES (
-            (SELECT tmp.EMAIL, MAX(NR_EINKAUFSLISTE) + 1 FROM EINKAUFSLISTE tmp WHERE tmp.EMAIL = ?)
-        , ?, ?)
-         */
-
-        //for-each
-        /*
-        INSERT INTO EINTRAG (EMAIL, NR_EINKAUFSLISTE, MENGE, BEZEICHNUN) VALUES (?, ?, ?, ?)
-         */
-
-        //rdy
+        String out = Tool.execPHPString( "http://localhost/erstellenEinkaufsliste?nr_einkaufsliste="+neu.getNrEinkaufsliste());
     }
 }

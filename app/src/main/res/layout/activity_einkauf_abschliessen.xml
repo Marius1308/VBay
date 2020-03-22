@@ -42,16 +42,22 @@
       android:text="Entfernung:" />
 
     <TextView
+      android:id="@+id/vonAbschluss"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Von:" />
+
+    <TextView
+      android:id="@+id/bisAbbruch"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Bis:" />
+
+    <TextView
       android:id="@+id/listAbschluss"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="Einkaufsliste:" />
-
-    <TextView
-      android:id="@+id/dateAbschluss"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="Datum:" />
 
     <ScrollView
       android:layout_width="match_parent"
@@ -63,6 +69,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+          android:id="@+id/eintraegeAbbruch"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
       </LinearLayout>
     </ScrollView>
 

@@ -3,6 +3,7 @@ package com.wirvsvirus.vbay.backend;
 import com.wirvsvirus.vbay.data.Benutzer;
 import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
+import com.wirvsvirus.vbay.frontend.EinkaufUebersicht;
 
 import java.util.List;
 
@@ -86,6 +87,7 @@ public class Api {
 
     /**
      * Liest die detaillierten Daten einer Einkaufsliste
+     * @param liste
      */
     public EinkaufslisteDetail lesenDetail(EinkaufslisteUebersicht liste){
         return uebersichtDelegate.lesenDetail(liste);

@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.marius.vbay.R;
+import com.wirvsvirus.vbay.backend.Api;
+import com.wirvsvirus.vbay.data.Benutzer;
 
 public class SignIn extends AppCompatActivity {
 
@@ -39,23 +41,32 @@ public class SignIn extends AppCompatActivity {
     super.onStart();
   }
 
+
   public void onLoginPress(){
 
     try {
 
-    } catch (RuntimeException e){
-      openLoginDialog(e.getMessage());
-  return;
+      Intent intent;
+      intent = new Intent(this, MenuHelfer.class);
+      intent.putExtra("benutzer",  Api.getInstance().anmelden(etEmail.getText().toString(), etPasswort.getText().toString()));
+      intent.putExtra("a", false);
+      startActivity(intent);// Todo switch
+
+    } catch (Exception e){
+      openErrorDialog(e.getMessage());
+      return;
+
     }
-    Intent intent;
-    intent = new Intent(this, MenuHelfer.class);
-    startActivity(intent);
+
+
+
   }
 
-  private void openLoginDialog(String exception){
+  private void openErrorDialog(String exception){
     Toast.makeText(getApplicationContext(), exception, Toast.LENGTH_LONG).show();
   }
 
+  @Override
   public void onBackPressed() {
     super.onBackPressed();
     Intent intent;

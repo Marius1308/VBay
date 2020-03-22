@@ -53,4 +53,12 @@ public class EinkaufslisteDetail implements Serializable {
     public void setBeduerftiger(Benutzer beduerftiger) {
         this.beduerftiger = beduerftiger;
     }
+
+    public Optional<Benutzer> getHelfer(){
+        return helfer;
+
+    }
+    public void setHelfer(Optional<Benutzer> helfer){
+    this.helfer=helfer;
+    }
 }
