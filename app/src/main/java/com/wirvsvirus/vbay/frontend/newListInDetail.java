@@ -13,7 +13,6 @@ public class newListInDetail extends AppCompatActivity {
 
   TextView descriptionDetailText;
   TextView nameText;
-  Button backToList;
   Button accept;
 
   @Override
@@ -23,18 +22,10 @@ public class newListInDetail extends AppCompatActivity {
 
     descriptionDetailText = (TextView) findViewById(R.id.descriptionAbschluss);
     nameText = (TextView) findViewById(R.id.nameDetail);
-    backToList = (Button) findViewById(R.id.backDetail);
     accept = (Button) findViewById(R.id.acceptDetail);
 
     Bundle extras = getIntent().getExtras();
     descriptionDetailText.setText("Beschreibung: " + extras.getString("description"));
-
-    backToList.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        backToOverview();
-      }
-    });
 
     accept.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -45,16 +36,11 @@ public class newListInDetail extends AppCompatActivity {
 
   }
 
-  private void backToOverview(){
-    Intent intent;
-    intent = new Intent(this, EinkaufUebersicht.class);
-    startActivity(intent);
-  }
-
   private void acceptList(){
     Intent intent;
     intent = new Intent(this, MenuHelfer.class);
     startActivity(intent);
+
   }
 
   @Override

@@ -24,7 +24,7 @@ private Button signUpButton;
       }
     });
 
-    System.out.println("create!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
   }
 
 
@@ -38,6 +38,7 @@ private Button signUpButton;
     Intent intent;
     intent = new Intent(this, SignUp.class);
     startActivity(intent);
+    finish();
   }
 
 

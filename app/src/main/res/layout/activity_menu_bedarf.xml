@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.wirvsvirus.vbay.frontend.MenuHelfer">
+  tools:context="com.wirvsvirus.vbay.frontend.MenuBedarf">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -12,18 +12,15 @@
     android:orientation="vertical">
 
     <TextView
-      android:id="@+id/EinkaufslisteHead"
+      android:id="@+id/Menu"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Einkaufsliste:"
-      android:textAlignment="center"
-      android:textStyle="bold"
-      android:gravity="center_horizontal" />
+      android:text="Menu" />
 
     <ScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_weight="10">
+      android:layout_weight="50">
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -31,34 +28,35 @@
         android:orientation="vertical">
 
         <TextView
-          android:id="@+id/listeEintrag"
+          android:id="@+id/textView7"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_weight="2"
-          android:text="-Keine Einträge" />
+          android:text="Aufträge in Bearbeitung:" />
       </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="50">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/textView8"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Wartende Aufträge:" />
+      </LinearLayout>
+    </ScrollView>
+
+    <Button
+      android:id="@+id/neueListe"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="20dp"
-      android:orientation="horizontal">
-
-      <Button
-        android:id="@+id/einkaufAnnehmenButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Einkauf annehmen" />
-
-      <Button
-        android:id="@+id/einkaufAbschlussButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Einkauf Abschließen" />
-    </LinearLayout>
-
+      android:text="Neuer Einkauf" />
   </LinearLayout>
 </android.support.constraint.ConstraintLayout>

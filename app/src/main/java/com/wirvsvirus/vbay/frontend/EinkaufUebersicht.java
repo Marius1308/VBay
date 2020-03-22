@@ -36,7 +36,7 @@ public class EinkaufUebersicht extends AppCompatActivity {
   }
 
   private void setList(){
-    layout.removeAllViews();
+    //layout.removeAllViews();
     addToList("20km","12.07.2020", "Eine Milch");
     addToList("200km","12.07.2020", "Eins Einkauf bitte");
     addToList("20km","12.07.2020", "Eine Milch");

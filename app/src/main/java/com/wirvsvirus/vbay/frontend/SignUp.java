@@ -9,13 +9,24 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.marius.vbay.R;
+import com.wirvsvirus.vbay.backend.Api;
+import com.wirvsvirus.vbay.data.Benutzer;
 
 public class SignUp extends AppCompatActivity {
 
-  EditText etName;
+
   EditText etEmail;
+  EditText etName;
+  EditText etVorname;
+  EditText etPlz;
+  EditText etOrt;
+  EditText etStrasse;
+  EditText etAddressZusatz;
+  EditText etTele;
   EditText etPasswort;
+
   Button enter;
+  Button login;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +36,12 @@ public class SignUp extends AppCompatActivity {
     etName = (EditText) findViewById(R.id.etName);
     etEmail = (EditText) findViewById(R.id.etEmail);
     etPasswort = (EditText) findViewById(R.id.etPasswort);
+    etVorname = (EditText) findViewById(R.id.etVorname);
+    etPlz = (EditText) findViewById(R.id.etPlz);
+    etOrt = (EditText) findViewById(R.id.etOrt);
+    etStrasse = (EditText) findViewById(R.id.etAdresse);
     enter = (Button) findViewById(R.id.enterButtton);
+    login = (Button) findViewById(R.id.login);
     enter.setOnClickListener(new View.OnClickListener() {
       @Override
      public void onClick(View view) {
@@ -34,23 +50,49 @@ public class SignUp extends AppCompatActivity {
      }
     });
 
+    login.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        zumLogin();
+      }
+    });
 
+
+  }
+
+  private void zumLogin(){
+    Intent intent;
+    intent = new Intent(this, SignIn.class);
+    startActivity(intent);
+    finish();
   }
 
   public void onEnterPress(){
 
-    try {
-
-    }catch (RuntimeException e){
-      openEnterDialog(e.getMessage());
+    if(!inputIsValid()){
+      openErrorDialog("Ungültige Eingabe");
       return;
     }
 
+    Benutzer benutzer = erstelleBenutzer();
 
-    System.out.println(etPasswort.getText().toString());
+    try {
+      Api.getInstance().regristieren(benutzer);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      //openErrorDialog(e.getMessage());
+      //return; //Todo Use
+    }
+
     Intent intent;
     intent = new Intent(this, SignIn.class);
     startActivity(intent);
+
+  }
+
+  private Benutzer erstelleBenutzer(){
+    return new Benutzer(etEmail.getText().toString(), etName.getText().toString(), "Vorname", 1234,"Ort","StrasseHausnr", "AdressZusatz", "telefonNr", etPasswort.getText().toString());
   }
 
   @Override
@@ -62,7 +104,7 @@ public class SignUp extends AppCompatActivity {
  return true;
   }
 
-  private void openEnterDialog(String exception){
+  private void openErrorDialog(String exception){
     Toast.makeText(getApplicationContext(), exception, Toast.LENGTH_LONG).show();
   }
 
