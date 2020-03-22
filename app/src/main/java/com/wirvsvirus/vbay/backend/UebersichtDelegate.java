@@ -1,16 +1,17 @@
 package com.wirvsvirus.vbay.backend;
 
 import com.wirvsvirus.vbay.data.Benutzer;
-import com.wirvsvirus.vbay.data.Einkaufsliste;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
+import com.wirvsvirus.vbay.util.Tool;
 
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UebersichtDelegate {
 
-    public List<EinkaufslisteUebersicht> lesenEinkaufslistenHelferUebersicht(Benutzer helfer) {
+    public List<EinkaufslisteUebersicht> lesenEinkaufslistenHelferUebersicht(Benutzer helfer) throws IOException {
         String out = Tool.execPHPString( "http://localhost//lesenEinkaufslistenHelferUebersicht?email_helfer="+Tool.decodeURL(helfer.getEmail()));
         List<EinkaufslisteUebersicht> einkaufslisten= new ArrayList<>();
 
@@ -22,7 +23,7 @@ public class UebersichtDelegate {
         return einkaufslisten;
     }
 
-    public List<EinkaufslisteUebersicht> lesenEinkaufslistenBeduerftigerUebersicht(Benutzer beduerftiger) {
+    public List<EinkaufslisteUebersicht> lesenEinkaufslistenBeduerftigerUebersicht(Benutzer beduerftiger) throws IOException {
         String out = Tool.execPHPString( "http://localhost/lesenEinkaufslistenBeduerftigerUebersicht?email="+Tool.decodeURL(beduerftiger.getEmail()));
         List<EinkaufslisteUebersicht> einkaufslisten= new ArrayList<>();
 
@@ -32,5 +33,17 @@ public class UebersichtDelegate {
             einkaufslisten.add(Tool.createEinkaufsliste(outo));
         }
         return einkaufslisten;
+    }
+
+    public List<EinkaufslisteUebersicht> lesenEinkaufslistenUebersicht(Benutzer helfer) {
+        return null;
+    }
+
+    public EinkaufslisteDetail lesenDetail(EinkaufslisteUebersicht liste) {
+        return null;
+    }
+
+    public List<EinkaufslisteDetail> lesenDetailUebersicht(Benutzer helfer) {
+        return null;
     }
 }
