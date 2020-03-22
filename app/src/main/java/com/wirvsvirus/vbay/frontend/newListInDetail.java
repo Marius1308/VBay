@@ -8,12 +8,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.marius.vbay.R;
+import com.wirvsvirus.vbay.backend.Api;
+import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
+import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 public class newListInDetail extends AppCompatActivity {
 
   TextView descriptionDetailText;
   TextView nameText;
   Button accept;
+  Benutzer benutzer;
+  EinkaufslisteUebersicht liste;
+  EinkaufslisteDetail einkaufslisteDetail;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,10 @@ public class newListInDetail extends AppCompatActivity {
     accept = (Button) findViewById(R.id.acceptDetail);
 
     Bundle extras = getIntent().getExtras();
-    descriptionDetailText.setText("Beschreibung: " + extras.getString("description"));
+    benutzer = (Benutzer) extras.getSerializable("benutzer");
+    liste = (EinkaufslisteUebersicht) extras.getSerializable("liste");
+
+    einkaufslisteDetail = Api.getInstance().le
 
     accept.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -37,6 +47,9 @@ public class newListInDetail extends AppCompatActivity {
   }
 
   private void acceptList(){
+
+    Api.getInstance().einkaufAnnehmen(liste, benutzer);
+
     Intent intent;
     intent = new Intent(this, MenuHelfer.class);
     startActivity(intent);
