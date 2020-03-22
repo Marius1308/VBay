@@ -13,7 +13,7 @@ import java.util.List;
 public class UebersichtDelegate {
 
     public List<EinkaufslisteUebersicht> lesenEinkaufslistenHelferUebersicht(Benutzer helfer) throws IOException {
-        List<String> out = Tool.callLink( "http://localhost//lesenEinkaufslistenHelferUebersicht?email_helfer="+Tool.decodeURL(helfer.getEmail()));
+        List<String> out = Tool.callLink( "lesenEinkaufslistenHelferUebersicht?email_helfer="+Tool.decodeURL(helfer.getEmail()));
         List<EinkaufslisteUebersicht> einkaufslisten= new ArrayList<>();
 
         for (String line:out){
@@ -24,7 +24,7 @@ public class UebersichtDelegate {
     }
 
     public List<EinkaufslisteUebersicht> lesenEinkaufslistenBeduerftigerUebersicht(Benutzer beduerftiger) throws IOException {
-        List<String> out = Tool.callLink( "http://localhost/lesenEinkaufslistenBeduerftigerUebersicht?email="+Tool.decodeURL(beduerftiger.getEmail()));
+        List<String> out = Tool.callLink( "lesenEinkaufslistenBeduerftigerUebersicht?email="+Tool.decodeURL(beduerftiger.getEmail()));
         List<EinkaufslisteUebersicht> einkaufslisten= new ArrayList<>();
 
         for (String line:out){
@@ -35,7 +35,7 @@ public class UebersichtDelegate {
     }
 
     public List<EinkaufslisteUebersicht> lesenEinkaufslistenUebersicht(Benutzer helfer) throws IOException {
-        List<String> out = Tool.callLink( "http://localhost/lesenEinkaufslistenUebersicht&email="+Tool.encodeURL(helfer.getEmail()));
+        List<String> out = Tool.callLink( "lesenEinkaufslistenUebersicht&email="+Tool.encodeURL(helfer.getEmail()));
         List<EinkaufslisteUebersicht> einkaufslisten= new ArrayList<>();
 
         for (String line:out){

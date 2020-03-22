@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Tool {
-    private static final String serverEndpoint = "http://localhost/";
+    private static final String serverEndpoint = "https://homeender.de:443/";
     public static String encodeURL(String url) throws MalformedURLException {
         try {
             String encodeURL= URLEncoder.encode( url, "UTF-8" );
