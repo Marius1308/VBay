@@ -22,6 +22,18 @@ public class EinkaufslisteDetail implements Serializable {
         this.uhrBis = uhrBis;
     }
 
+    public EinkaufslisteDetail(){
+        super();
+    }
+
+    public Eintrag[] getEintraege() {
+        return eintraege;
+    }
+
+    public void setEintraege(Eintrag[] eintraege){
+        this.eintraege=eintraege;
+    }
+
     public int getNrEinkaufsliste() {
         return nrEinkaufsliste;
     }
