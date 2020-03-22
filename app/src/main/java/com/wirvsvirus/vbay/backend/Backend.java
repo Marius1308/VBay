@@ -1,4 +1,6 @@
 package com.wirvsvirus.vbay.backend;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLDecoder;
@@ -125,5 +127,25 @@ public class Backend {
         } catch (UnsupportedEncodingException e) {
             return "Fehler beim decoding" +e.getMessage();
         }
+    }
+
+    public String execPHP(String scriptName, String param) {
+        StringBuilder output= null;
+        try {
+            String line;
+            output = new StringBuilder();
+            Process p = Runtime.getRuntime().exec("php " + scriptName + " " + param);
+            BufferedReader input =
+                    new BufferedReader
+                            (new InputStreamReader(p.getInputStream()));
+            while ((line = input.readLine()) != null) {
+                output.append(line);
+            }
+            input.close();
+        }
+        catch (Exception err) {
+            err.printStackTrace();
+        }
+        return output.toString();
     }
 }
