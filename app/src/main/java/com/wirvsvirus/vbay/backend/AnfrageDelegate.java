@@ -15,6 +15,11 @@ class AnfrageDelegate {
 
     public void einkaufAbbrechen(Einkaufsliste einkaufsliste) {
         //update email löschen in einkaufsliste
+    public void einkaufAbbrechen(EinkaufslisteDetail einkaufsliste) {
+        /*
+        UPDATE EINKAUFSLISTE SET EMAIL_HELFER = (NULL)
+        WHERE EMAIL = ? AND NR_EINKAUFSLISTE = ?
+         */
     }
 
     public List<EinkaufslisteUebersicht> lesenEinkaufslistenUebersicht() {

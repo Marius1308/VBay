@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -82,6 +83,6 @@ public class Util {
         dist = dist * 60 * 1.1515 * 1.609344;
         return dist;
     }
-
+    
 
 }
