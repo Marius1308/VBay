@@ -1,8 +1,11 @@
 package com.wirvsvirus.vbay.util;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
 
 import java.io.IOException;
@@ -17,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Tool {
@@ -100,12 +104,53 @@ public class Tool {
         return new String[]{n.getEmail(),n.getName(),n.getVorname(),""+n.getPlz(),n.getOrt(),n.getStrasseHausnr(),n.getTelefonNr(),""+n.getBreitengrad(),""+n.getLaengengrad()};
     }
 
-    public static EinkaufslisteUebersicht createEinkaufsliste(String[] param){
-//        Einkaufsliste liste = new Einkaufsliste();
-//        liste.setBeduerftiger(param[0]);
-//        liste.setUhrVon(param[1]);
-//        liste.setUhrBis(new LocalDateTime(param[2]));
+    public static EinkaufslisteUebersicht createEinkaufslisteUebersicht(String[] param){
+        EinkaufslisteUebersicht liste = new EinkaufslisteUebersicht();
+        liste.setEmailBeduerftiger(param[0]);
+     //   liste.setUhrVon(param[1]);
+      //  liste.setUhrBis(new LocalDateTime(param[2]));
         return new EinkaufslisteUebersicht();
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static EinkaufslisteDetail createEinkaufslisteDetail(String[] param){
+        EinkaufslisteDetail liste= new EinkaufslisteDetail();
+        Benutzer b = new Benutzer();
+        b.setEmail(param[13]);
+        b.setName(param[14]);
+        b.setVorname(param[15]);
+        b.setPlz(Integer.getInteger(param[16]));
+        b.setOrt(param[17]);
+        b.setStrasseHausnr(param[18]);
+        b.setAdresszusatz(param[19]);
+        b.setTelefonNr(param[20]);
+        b.setBreitengrad(Double.parseDouble(param[21]));
+        b.setLaengengrad(Double.parseDouble(param[22]));
+
+        Benutzer h = new Benutzer();
+        h.setEmail(param[3]);
+        h.setName(param[4]);
+        h.setVorname(param[5]);
+        h.setPlz(Integer.getInteger(param[6]));
+        h.setOrt(param[7]);
+        h.setStrasseHausnr(param[8]);
+        h.setAdresszusatz(param[9]);
+        h.setTelefonNr(param[10]);
+        h.setBreitengrad(Double.parseDouble(param[11]));
+        h.setLaengengrad(Double.parseDouble(param[12]));
+
+        //List<String> out = Tool.callLink( "http://localhost/ TODO Einträge beschaffen
+
+        liste.setBeduerftiger(b);
+        liste.setNrEinkaufsliste(Integer.getInteger(param[0]));
+        liste.setUhrVon(LocalDateTime.parse(param[1]));
+        liste.setUhrBis(LocalDateTime.parse(param[2]));
+    //   liste.setEintraege();                                     TODO
+        liste.setHelfer(Optional.of(h));
+        return liste;
+
     }
 
     public static String[] aufdröselnEinkaufsliste(EinkaufslisteUebersicht l){

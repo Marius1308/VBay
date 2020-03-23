@@ -1,5 +1,8 @@
 package com.wirvsvirus.vbay.backend;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.wirvsvirus.vbay.data.Benutzer;
 import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
@@ -20,7 +23,7 @@ public class UebersichtDelegate {
 
         for (String line:out){
             String[] outo = line.split(";");
-            einkaufslisten.add(Tool.createEinkaufsliste(outo));
+            einkaufslisten.add(Tool.createEinkaufslisteUebersicht(outo));
         }
         return einkaufslisten;
     }
@@ -31,7 +34,7 @@ public class UebersichtDelegate {
 
         for (String line:out){
             String[] outo = line.split(";");
-            einkaufslisten.add(Tool.createEinkaufsliste(outo));
+            einkaufslisten.add(Tool.createEinkaufslisteUebersicht(outo));
         }
         return einkaufslisten;
     }
@@ -42,16 +45,27 @@ public class UebersichtDelegate {
 
         for (String line:out){
             String[] outo = line.split(";");
-            einkaufslisten.add(Tool.createEinkaufsliste(outo));
+            einkaufslisten.add(Tool.createEinkaufslisteUebersicht(outo));
         }
         return einkaufslisten;
     }
 
-    public EinkaufslisteDetail lesenDetail(EinkaufslisteUebersicht liste) {
-        return null;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public EinkaufslisteDetail lesenDetail(EinkaufslisteUebersicht liste) throws IOException {
+        List<String> out = Tool.callLink( "http://localhost/lesenDetail&nr_einkaufsliste="+Tool.encodeURL(liste.getNrEinkaufsliste()+"&emailBeduerftiger="+Tool.encodeURL(liste.getEmailBeduerftiger())));
+        Tool.createEinkaufslisteDetail((String[])out.toArray());
+        return Tool.createEinkaufslisteDetail((String[])out.toArray());
     }
 
-    public List<EinkaufslisteDetail> lesenDetailUebersicht(Benutzer helfer) {
-        return null;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public List<EinkaufslisteDetail> lesenDetailUebersicht(Benutzer helfer) throws IOException {
+        List<String> out = Tool.callLink( "http://localhost/lesenDetail&email="+Tool.encodeURL(helfer.getEmail()));
+        List<EinkaufslisteDetail> einkaufslisten= new ArrayList<>();
+
+        for (String line:out){
+            String[] outo = line.split(";");
+            einkaufslisten.add(Tool.createEinkaufslisteDetail(outo));
+        }
+        return einkaufslisten;
     }
 }
