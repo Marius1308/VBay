@@ -35,34 +35,13 @@ public class Util {
 
     public Double getDistance(Benutzer beduerftiger, Benutzer helfer) throws IOException, JSONException {
 
-          return calculateDistance(getBreitengrad(beduerftiger), getLaengengrad(beduerftiger), getBreitengrad(helfer), getLaengengrad(helfer));
+          return calculateDistance(beduerftiger.getBreitengrad(), beduerftiger.getLaengengrad(), beduerftiger.getBreitengrad(), beduerftiger.getLaengengrad());
 
     }
 
-    private Double getBreitengrad(@NonNull Benutzer user) throws IOException, JSONException {
-        if (user.getBreitengrad() == null){
-            fuellenKoordinaten(user);
-        }
-        return user.getBreitengrad();
-    }
+    public static void fuellenKoordinaten(Benutzer beduerftiger) throws IOException, JSONException {
+         new NetworkConnector().execute(beduerftiger);
 
-
-
-    private Double getLaengengrad(@NonNull Benutzer user) throws IOException, JSONException {
-        //TODO bei der Registrierung
-        if (user.getLaengengrad() == null){
-            fuellenKoordinaten(user);
-        }
-        return user.getLaengengrad();
-    }
-
-    public static JSONObject fuellenKoordinaten(Benutzer beduerftiger) throws IOException, JSONException {
-
-        String apiKey = "mevuW44x45HNe9rCHCaXVIJu0kmTvokNC6gIcUFBy5o";
-        String searchQuery = beduerftiger.getPlz() + "+" + beduerftiger.getOrt() + "+" + beduerftiger.getStrasseHausnr().replace(' ', '+');
-        JSONObject resp = RestClient.getGeocode(searchQuery, apiKey);
-        Log.d("fuellenKoordinaten", resp.toString());
-        return resp;
     }
 
     private void speichernKoordinaten(JSONObject resp) {
@@ -85,4 +64,12 @@ public class Util {
     }
     
 
+    public static class JsonPassUser{
+        public JSONObject jsonObject;
+        public Benutzer user;
+        public JsonPassUser(JSONObject jsonObject, Benutzer user){
+            this.jsonObject = jsonObject;
+            this.user = user;
+        }
+    }
 }

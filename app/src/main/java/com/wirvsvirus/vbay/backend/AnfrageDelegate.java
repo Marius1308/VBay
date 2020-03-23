@@ -3,6 +3,7 @@ package com.wirvsvirus.vbay.backend;
 import com.wirvsvirus.vbay.data.Benutzer;
 import com.wirvsvirus.vbay.data.EinkaufslisteDetail;
 import com.wirvsvirus.vbay.data.EinkaufslisteUebersicht;
+import com.wirvsvirus.vbay.util.DBConnector;
 import com.wirvsvirus.vbay.util.Tool;
 
 import java.io.IOException;
@@ -16,18 +17,18 @@ class AnfrageDelegate {
     }
 
     public void einkaufAbbrechen(EinkaufslisteDetail einkaufsliste) throws IOException {
-        Tool.callLink("updateEinkaufslisteHelfer&email_beduerftiger="+einkaufsliste.getBeduerftiger().getEmail()+"&email_helfer="+einkaufsliste.getHelfer().get().getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
+        new DBConnector().execute("update.php?query=updateEinkaufslisteHelfer&email_beduerftiger="+einkaufsliste.getBeduerftiger().getEmail()+"&email_helfer="+einkaufsliste.getHelfer().get().getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
         //update email löschen in einkaufsliste
     }
 
 
     public void einkaufAnnehmen(EinkaufslisteDetail einkaufsliste, Benutzer helfer) throws IOException {
-        Tool.callLink("updateEinkaufslisteHelfer&email_beduerftiger="+"&email_helfer="+helfer.getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
+        new DBConnector().execute("update.php?query=updateEinkaufslisteHelfer&email_beduerftiger="+"&email_helfer="+helfer.getEmail()+"&nr_einkaufsliste="+ einkaufsliste.getNrEinkaufsliste());
         //update helfer bei einkaufsliste
     }
 
     public void abbrechenEinkaufslisteBeduerftiger(EinkaufslisteDetail liste) throws IOException {
-        Tool.callLink("loeschenEinkaufsliste?nr_einkaufsliste="+liste.getNrEinkaufsliste());
+        new DBConnector().execute("delete.php?query=loeschenEinkaufsliste?nr_einkaufsliste="+liste.getNrEinkaufsliste());
     }
 
     public void bearbeitenEinkaufsliste(EinkaufslisteDetail alt, EinkaufslisteDetail neu) throws IOException {
@@ -36,6 +37,6 @@ class AnfrageDelegate {
     }
 
     public void erstellenEinkaufsliste(EinkaufslisteDetail neu) throws IOException {
-        Tool.callLink( "http://localhost/erstellenEinkaufsliste?nr_einkaufsliste="+neu.getNrEinkaufsliste());
+        new DBConnector().execute("insert.php?query=erstellenEinkaufsliste?nr_einkaufsliste="+neu.getNrEinkaufsliste());
     }
 }

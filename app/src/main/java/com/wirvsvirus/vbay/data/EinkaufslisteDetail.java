@@ -61,4 +61,8 @@ public class EinkaufslisteDetail implements Serializable {
     public void setHelfer(Optional<Benutzer> helfer){
     this.helfer=helfer;
     }
+
+    public Eintrag[] getEintraege() {
+        return eintraege;
+    }
 }

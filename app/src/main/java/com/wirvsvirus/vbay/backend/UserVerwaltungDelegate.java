@@ -1,6 +1,9 @@
 package com.wirvsvirus.vbay.backend;
 
+import android.util.Log;
+
 import com.wirvsvirus.vbay.data.Benutzer;
+import com.wirvsvirus.vbay.util.DBConnector;
 import com.wirvsvirus.vbay.util.SemantikException;
 import com.wirvsvirus.vbay.util.Tool;
 import com.wirvsvirus.vbay.util.Util;
@@ -11,12 +14,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-class UserVerwaltungDelegate {
+public class UserVerwaltungDelegate {
 
 
-    public Benutzer anmelden(String email, String passwort) throws SemantikException, IOException {
-        String dataset = Tool.callLinkSingleString("select.php?query=anmelden&email="+Tool.decodeURL(email));
+    public Benutzer anmelden(String email, String passwort) throws SemantikException, IOException, ExecutionException, InterruptedException {
+        String dataset = new DBConnector().execute("select.php?query=anmelden&email="+Tool.decodeURL(email)).get().get(0);
         String[] split = dataset.split(";");
         try {
             if (!split[1].equals(Tool.passWortVerchlüsselung(passwort))){
@@ -33,9 +37,8 @@ class UserVerwaltungDelegate {
     public void regristieren(Benutzer user) {
 
         try {
-            JSONObject jo = Util.fuellenKoordinaten(user);
-            JSONObject bottomRight = jo.getJSONObject("MetalInfo").getJSONObject("View").getJSONObject("Result").getJSONObject("Relevance").getJSONObject("LocationId").getJSONObject("MapView").getJSONObject("BottomRight");
-            Tool.callLink("/regristieren?email="+user.getEmail()+"&passwort="+user.getPasswort()+"&name="+user.getName()+"&vorname="+user.getVorname()+"&plz="+user.getPlz()+"&ort"+user.getOrt()+"&strasse"+user.getStrasseHausnr()+"&adresszusatz="+user.getAdresszusatz()+"&telefonnummer="+user.getTelefonNr()+"&breitengrad="+bottomRight.getString("Latitude")+"&laengengrad=+"+bottomRight.getString("Longitude"));
+            Util.fuellenKoordinaten(user);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +46,12 @@ class UserVerwaltungDelegate {
             e.printStackTrace();
         }
 
+    }
+
+    public static void registrierenAbschliessen(Benutzer user, JSONObject jo) throws JSONException, IOException {
+        JSONObject bottomRight = jo.getJSONObject("MetalInfo").getJSONObject("View").getJSONObject("Result").getJSONObject("Relevance").getJSONObject("LocationId").getJSONObject("MapView").getJSONObject("BottomRight");
+        new DBConnector().execute("insert.php?query=/regristieren?email="+user.getEmail()+"&passwort="+user.getPasswort()+"&name="+user.getName()+"&vorname="+user.getVorname()+"&plz="+user.getPlz()+"&ort"+user.getOrt()+"&strasse"+user.getStrasseHausnr()+"&adresszusatz="+user.getAdresszusatz()+"&telefonnummer="+user.getTelefonNr()+"&breitengrad="+bottomRight.getString("Latitude")+"&laengengrad=+"+bottomRight.getString("Longitude"));
+        Log.d("fuellenKoordinaten", jo.toString());
     }
 }
 

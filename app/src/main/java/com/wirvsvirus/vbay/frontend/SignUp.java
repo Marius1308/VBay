@@ -47,6 +47,9 @@ public class SignUp extends AppCompatActivity {
     enter = (Button) findViewById(R.id.enterButtton);
     login = (Button) findViewById(R.id.login);
     aSwitch = (Switch) findViewById(R.id.switch1);
+    etAddressZusatz = (EditText) findViewById(R.id.etAdressZusatz);
+    etTele = (EditText) findViewById(R.id.etTele);
+
     enter.setOnClickListener(new View.OnClickListener() {
       @Override
      public void onClick(View view) {
@@ -114,6 +117,7 @@ public class SignUp extends AppCompatActivity {
       etAddressZusatz.getText().toString(),
       etTele.getText().toString(),
       etPasswort.getText().toString(),
+
       istHelfer);
   }
 

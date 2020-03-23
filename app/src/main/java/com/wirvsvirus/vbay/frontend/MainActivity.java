@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.marius.vbay.R;
+import com.wirvsvirus.vbay.util.NetworkConnector;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ private Button signUpButton;
     intent = new Intent(this, SignUp.class);
     startActivity(intent);
     finish();
+
   }
 
 

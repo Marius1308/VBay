@@ -47,6 +47,7 @@ public class Tool {
 
     public static List<String> callLink(String link) throws IOException {
         URL url = new URL(serverEndpoint + link);
+        Log.d("callLinkResponse", "Calling " + serverEndpoint + link);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.connect();
         int responseCode = conn.getResponseCode();
@@ -56,6 +57,7 @@ public class Tool {
 
         Scanner sc = new Scanner(url.openStream());
         List<String> out = new ArrayList<>();
+        Log.d("callLinkResponse", "Called " + serverEndpoint + link);
         while(sc.hasNext())
         {
             out.add(sc.nextLine());

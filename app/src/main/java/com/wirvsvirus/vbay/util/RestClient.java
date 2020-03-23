@@ -1,5 +1,7 @@
 package com.wirvsvirus.vbay.util;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,9 +14,11 @@ import java.util.Scanner;
 public class RestClient {
 
     private static final String urlBlueprint = "https://geocoder.ls.hereapi.com/6.2/geocode.json?apiKey={API_KEY}&searchtext={SEARCH_TEXT}";
+    private static final String apiKey = "mevuW44x45HNe9rCHCaXVIJu0kmTvokNC6gIcUFBy5o";
 
-    public static JSONObject getGeocode(String searchQuery, String apiKey) throws IOException, JSONException {
+    public static JSONObject getGeocode(String searchQuery) throws IOException, JSONException {
         String requestUrl = urlBlueprint.replace("{API_KEY}", apiKey).replace("{SEARCH_TEXT}", searchQuery);
+        Log.d("callLinkResponse", "Calling " + requestUrl);
         URL url = new URL(requestUrl);
         checkConnection(url);
         String rep = parseResponse(url);
